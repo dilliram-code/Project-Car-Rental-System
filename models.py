@@ -26,3 +26,10 @@ class Vehicle(ABC):
     def get_rate(self) -> float:
         '''Return base rate - subclasses may override.'''
         return self.base_rate_per_day
+
+@dataclass
+class Car(Vehicle): 
+    seats: int = 4
+
+    def vehicle_type(self) -> str:
+        return "Car"
