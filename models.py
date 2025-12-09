@@ -40,6 +40,11 @@ class SUV(Vehicle):
     def vehicle_type(self) -> str:
         return "SUV"
     
-    def get_rate(self):
+    def get_rate(self) -> float:
         # example of polymorphism: SUVs cost 15% extra
         return self.base_rate_per_day * 1.15
+
+@dataclass
+class Bike(Vehicle):
+    def vehicle_type(self) -> str:
+        return "Bike"
