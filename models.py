@@ -3,9 +3,7 @@ from dataclasses import dataclass, asdict
 from datetime import time, timedelta
 import uuid
 
-# -------------------------
 # VEHICLES - abstraction + inheritance
-# -------------------------
 @dataclass
 class Vehicle(ABC):
     id: str
@@ -33,3 +31,15 @@ class Car(Vehicle):
 
     def vehicle_type(self) -> str:
         return "Car"
+
+@dataclass
+class SUV(Vehicle):
+    seats: int = 7
+    four_wheel_drive: bool = False
+
+    def vehicle_type(self) -> str:
+        return "SUV"
+    
+    def get_rate(self):
+        # example of polymorphism: SUVs cost 15% extra
+        return self.base_rate_per_day * 1.15
