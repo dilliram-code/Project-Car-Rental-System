@@ -9,7 +9,7 @@ import uuid
 class VehicleUnavailableError(Exception):
     pass
 
-class CustomerNotFoundErro(Exception):
+class CustomerNotFoundError(Exception):
     pass
 
 class RentalNotFoundError(Exception):
@@ -30,3 +30,30 @@ class RentalSystem:
         if not customer.can_rent():
             raise ValueError("Customer must have a valid license.")
         self.customers[customer.id] = customer
+
+    # rental operations
+    def rent_vehicle(self, customer_id:str, vehicle_id:str, start:date, days:int):
+        if customer_id not in self.customers:
+            raise CustomerNotFoundError(customer_id)
+        if vehicle_id not in self.vehicles:
+            raise VehicleUnavailableError("Vehicle doesn't exist.")
+        
+        vehicle = self.vehicles(vehicle_id)
+        if not vehicle.is_available:
+            raise VehicleUnavailableError("Vehicle not available.")
+        
+        price = self.pricing_strategy.calculate_price(vehicle,days)
+        rental_id = str(uuid.uuid4())
+        rental_record = {
+            "id": rental_id,
+            "vehicle_id": vehicle_id,
+            "customer_id": customer_id,
+            "start_date": start.isoformat(),
+            "planned_days": days,
+            "price": price,
+            "is_active": True
+        }
+        vehicle.is_available = False
+        self.rentals[rental_id] = rental_record
+        
+        return rental_record
