@@ -57,3 +57,17 @@ class RentalSystem:
         self.rentals[rental_id] = rental_record
         
         return rental_record
+
+    def return_vehicle(self, rental_id:str, return_date: date):
+        rental = self.rentals.get(rental_id)
+        if not rental:
+            raise RentalNotFoundError(rental_id)
+        if not rental["is_active"]:
+            raise ValueError("Rental already closed.")
+        
+        vehicle = self.vehicles[rental["vehicle_id"]]
+        planned_days = rental["planned_days"]
+        start = date.fromisoformat(rental["start_date"])
+        actual_days = (return_date - start).days or 1
+
+        
