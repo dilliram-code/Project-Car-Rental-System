@@ -70,4 +70,20 @@ class RentalSystem:
         start = date.fromisoformat(rental["start_date"])
         actual_days = (return_date - start).days or 1
 
-        
+        # simple late fee calculation: 20 % extra per day in case of late
+        base_price = self.pricing_strategy.calculate_price(vehicle, min(actual_days, planned_days))
+        late_days = max(0, actual_days - planned_days)
+        late_fee = 0.2 * vehicle.get_rate() * late_days
+        total = base_price + late_fee
+
+        rental.update(
+            {"end_date": return_date.isoformat(),
+            "actual_days": actual_days,
+            "late_days": late_days,
+            "total_price": total,
+            "is_active": False
+            }
+        )
+
+        vehicle.is_available = True
+        return rental
