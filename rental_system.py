@@ -87,3 +87,11 @@ class RentalSystem:
 
         vehicle.is_available = True
         return rental
+    
+    # Search
+    def search_available(self, vehicle_type:str = None):
+        results = []
+        for v in self.vehicles.values():
+            if v.is_available and (vehicle_type is None or v.vehicle_type() == vehicle_type):
+                results.append(v)
+        return results 
