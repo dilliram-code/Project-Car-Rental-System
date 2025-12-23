@@ -4,6 +4,7 @@ from customers import Customer
 from pricising import PricingStrategy, FlatRateStrategy
 import json
 import uuid
+from dataclasses import asdict
 
 # custom exceptions
 class VehicleUnavailableError(Exception):
@@ -95,3 +96,12 @@ class RentalSystem:
             if v.is_available and (vehicle_type is None or v.vehicle_type() == vehicle_type):
                 results.append(v)
         return results 
+
+    def save_to_file(self, path: str):
+        data = {
+            "vehicles": [asdict(v) for v in self.vehicles.values()],
+            "customers": [asdict(c) for c in self.customers.values()],
+            "rentals": list(self.rentals.values())
+        }
+        with open(path, "w") as f:
+            json.dump(data, f, indent=2)
