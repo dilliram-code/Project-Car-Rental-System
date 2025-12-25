@@ -105,3 +105,23 @@ class RentalSystem:
         }
         with open(path, "w") as f:
             json.dump(data, f, indent=2)
+    
+    def load_from_file(self, path:str):
+        with open(path) as f:
+            data = json.load(f)
+
+            # ---------load vehicles ----------#
+        self.vehicles = {}
+        for v in data["vehicles"]:
+            vehicle_type = v.pop("vehicle_type", None)
+
+            if vehicle_type == "Car":
+                vehicle =  Car(**v)
+            elif vehicle_type == "SUV":
+                vehicle = SUV(**v)
+            elif vehicle_type == "Bike":
+                vehicle = Bike(**v)
+            else:
+                raise ValueError("Unknown vehicle type")
+
+            self.vehicles[vehicle.id] = vehicle
