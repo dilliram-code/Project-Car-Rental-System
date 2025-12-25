@@ -131,3 +131,8 @@ class RentalSystem:
         for c in data['customers']:
             customer = Customer(**c)
             self.customers[customer.id] = customer
+        
+        # --------load rentals ------------#
+        self.rentals = {}
+        for r in data['rentals']:
+            self.rentals[r['id']] = r
