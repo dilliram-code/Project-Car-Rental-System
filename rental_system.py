@@ -125,3 +125,9 @@ class RentalSystem:
                 raise ValueError("Unknown vehicle type")
 
             self.vehicles[vehicle.id] = vehicle
+        
+        # ---------load customers ---------#
+        self.customers = {}
+        for c in data['customers']:
+            customer = Customer(**c)
+            self.customers[customer.id] = customer
