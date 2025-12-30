@@ -27,3 +27,5 @@ today = date.today()                            # print(today)
 future_date = today + timedelta(days=3)
 returned = system.return_vehicle(rental['id'], future_date)
 print("Returned: ", returned)
+
+# FUTURE GOAL: add more functionality regarding the output 
