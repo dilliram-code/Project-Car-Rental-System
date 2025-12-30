@@ -2,7 +2,7 @@ from rental_system import RentalSystem
 from models import Car, SUV, Bike
 from customers import Customer
 from pricising import TieredRateStrategy
-from datetime import date
+from datetime import date, timedelta
 
 system = RentalSystem(pricing_strategy=TieredRateStrategy())
 
@@ -20,4 +20,10 @@ system.register_customer(customer)
 
 # rent car 3 days
 rental = system.rent_vehicle(customer.id, car.id, date.today(), days=3)
-print("Rented: ", rental)
+# print("Rented: ", rental)
+
+# return car after 4 days (1 late day)
+today = date.today()                            # print(today)
+future_date = today + timedelta(days=3)
+returned = system.return_vehicle(rental['id'], future_date)
+print("Returned: ", returned)
