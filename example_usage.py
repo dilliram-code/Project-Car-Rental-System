@@ -17,3 +17,7 @@ for v in [car, suv, bike]:
 # register customer
 customer = Customer(id="", name="Alisha", license_number="L-12345")
 system.register_customer(customer)
+
+# rent car 3 days
+rental = system.rent_vehicle(customer.id, car.id, date.today(), days=3)
+print("Rented: ", rental)

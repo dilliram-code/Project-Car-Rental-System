@@ -39,7 +39,7 @@ class RentalSystem:
         if vehicle_id not in self.vehicles:
             raise VehicleUnavailableError("Vehicle doesn't exist.")
         
-        vehicle = self.vehicles(vehicle_id)
+        vehicle = self.vehicles[vehicle_id]
         if not vehicle.is_available:
             raise VehicleUnavailableError("Vehicle not available.")
         
