@@ -2643,6 +2643,109 @@ img {
   color: var(--accent-emerald);
 }
 
+/* ==================== PRINT MEDIA STYLING (SINGLE CLEAN RECEIPT ONLY) ==================== */
+@media print {
+  @page {
+    size: portrait;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Hide entire application layout and non-receipt modals */
+  .ambient-background,
+  .app-layout,
+  .glass-nav,
+  .main-content,
+  .glass-footer,
+  .toast-container,
+  dialog:not(#invoiceModal) {
+    display: none !important;
+  }
+
+  /* Hide modal header, close button, and action buttons during print */
+  #invoiceModal .modal-header,
+  #invoiceModal .modal-footer,
+  #invoiceModal .modal-close-btn {
+    display: none !important;
+  }
+
+  dialog#invoiceModal {
+    display: block !important;
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 680px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  dialog#invoiceModal::backdrop {
+    display: none !important;
+  }
+
+  dialog#invoiceModal .modal-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    animation: none !important;
+  }
+
+  .invoice-content {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .invoice-card-print {
+    width: 100% !important;
+    max-width: 680px !important;
+    margin: 0 auto !important;
+    padding: 24px 28px !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .invoice-card-print * {
+    color: #0f172a !important;
+    text-shadow: none !important;
+  }
+
+  .invoice-card-print .invoice-badge-status {
+    border: 1px solid #059669 !important;
+    color: #059669 !important;
+    background: #ecfdf5 !important;
+  }
+
+  .invoice-card-print .total-amount,
+  .invoice-card-print [style*="color:var(--accent-cyan)"] {
+    color: #0284c7 !important;
+  }
+}
+
 /* -------------------- 14. TOAST NOTIFICATIONS -------------------- */
 .toast-container {
   position: fixed;
