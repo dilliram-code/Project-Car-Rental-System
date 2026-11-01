@@ -2735,17 +2735,13 @@ img {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .nav-links {
-    display: none;
+    display: none !important;
   }
 
   .mobile-menu-btn {
-    display: flex;
-  }
-
-  .mobile-nav-drawer.open {
-    display: flex;
+    display: flex !important;
   }
 
   .btn .btn-text {
