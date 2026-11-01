@@ -436,15 +436,36 @@ class RentalApp {
         const tab = btn.dataset.tab;
         this.switchTab(tab);
         // Close mobile drawer if opened
-        document.getElementById('mobileDrawer').classList.remove('open');
+        const drawer = document.getElementById('mobileDrawer');
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        if (drawer) drawer.classList.remove('open');
+        if (menuBtn) {
+          menuBtn.classList.remove('active');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        }
       });
     });
 
     // Mobile Hamburger
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    if (mobileMenuBtn) {
-      mobileMenuBtn.addEventListener('click', () => {
-        document.getElementById('mobileDrawer').classList.toggle('open');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    if (mobileMenuBtn && mobileDrawer) {
+      mobileMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = mobileDrawer.classList.toggle('open');
+        mobileMenuBtn.classList.toggle('active', isOpen);
+        mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      // Close mobile drawer when clicking anywhere outside
+      document.addEventListener('click', (e) => {
+        if (mobileDrawer.classList.contains('open')) {
+          if (!mobileDrawer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            mobileDrawer.classList.remove('open');
+            mobileMenuBtn.classList.remove('active');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          }
+        }
       });
     }
 
