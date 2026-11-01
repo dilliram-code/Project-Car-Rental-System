@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>AuraDrive | Next-Gen Glassmorphic Car Rental System</title>
+  <meta name="description" content="Ultra-modern, glassmorphic car rental system with smart pricing, real-time fleet analytics, and instant vehicle booking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Animated Light Orbs for Glassmorphism Depth -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="mesh-grid"></div>
+  </div>
+
+  <div class="app-layout">
+    <!-- Glassmorphic Top Navigation Bar -->
+    <header class="glass-nav">
+      <div class="nav-container">
+        <div class="brand">
+          <div class="brand-icon-wrapper">
+            <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2"></path>
+              <circle cx="7" cy="17" r="2"></circle>
+              <path d="M9 17h6"></path>
+              <circle cx="17" cy="17" r="2"></circle>
+            </svg>
+            <span class="brand-glow"></span>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">AURA<span class="accent-text">DRIVE</span></span>
+            <span class="brand-subtitle">Smart Rental Fleet</span>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Tabs -->
+        <nav class="nav-links" id="mainNav">
+          <button class="nav-tab active" data-tab="fleet">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+            <span>Explore Fleet</span>
+          </button>
+          <button class="nav-tab" data-tab="rentals">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span>Active Rentals</span>
+            <span class="tab-badge" id="activeRentalsBadge">0</span>
+          </button>
+          <button class="nav-tab" data-tab="customers">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Customers</span>
+          </button>
+          <button class="nav-tab" data-tab="analytics">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <span>Analytics & Hub</span>
+          </button>
+        </nav>
+
+        <!-- Right Quick Actions -->
+        <div class="nav-actions">
+          <button class="btn btn-glass-icon" id="themeToggleBtn" title="Toggle Dark / Light Glass Mode" aria-label="Toggle Theme">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+
+          <button class="btn btn-primary" id="openAddVehicleModalBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span class="btn-text">Add Vehicle</span>
+          </button>
+
+          <!-- Mobile Hamburger Menu Button -->
+          <button class="btn btn-glass-icon mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Navigation -->
+      <div class="mobile-nav-drawer" id="mobileDrawer">
+        <button class="mobile-nav-link active" data-tab="fleet">Explore Fleet</button>
+        <button class="mobile-nav-link" data-tab="rentals">Active Rentals (<span id="mobileRentalsBadge">0</span>)</button>
+        <button class="mobile-nav-link" data-tab="customers">Customer Directory</button>
+        <button class="mobile-nav-link" data-tab="analytics">Analytics & JSON Hub</button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- ==================== TAB 1: FLEET EXPLORATION ==================== -->
+      <section class="tab-pane active" id="tabFleet">
+        <!-- Hero Banner with Glass Finish -->
+        <div class="hero-glass-card">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span class="pulse-dot"></span>
+              <span>LIVE FLEET DISPATCH &bull; SMART OOP ENGINE</span>
+            </div>
+            <h1 class="hero-title">
+              Drive Tomorrow, <span class="gradient-text">Today</span>.
+            </h1>
+            <p class="hero-description">
+              Experience frictionless vehicle rentals powered by real-time polymorphic pricing, tiered weekly savings, and late-fee protection. Cars, luxury 4WD SUVs, and city sport bikes at your fingertips.
+            </p>
+            <div class="hero-stats-row">
+              <div class="hero-stat-item">
+                <span class="hero-stat-val" id="statTotalVehicles">0</span>
+                <span class="hero-stat-label">Total Fleet</span>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="hero-stat-item">
+                <span class="hero-stat-val text-success" id="statAvailableVehicles">0</span>
+                <span class="hero-stat-label">Available Now</span>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="hero-stat-item">
+                <span class="hero-stat-val text-accent" id="statActiveRentals">0</span>
+                <span class="hero-stat-label">On Rental</span>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="hero-stat-item">
+                <span class="hero-stat-val" id="statTotalRevenue">$0</span>
+                <span class="hero-stat-label">Revenue</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-car-glow"></div>
+            <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=900&q=80" alt="Futuristic sports car" class="hero-car-img" loading="eager">
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar (Glass Panel) -->
+        <div class="glass-panel filter-panel">
+          <div class="filter-top-row">
+            <!-- Search Input -->
+            <div class="search-input-wrapper">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="vehicleSearchInput" placeholder="Search by make, model, year, or features..." class="glass-input search-input">
+              <button class="clear-search-btn" id="clearSearchBtn" title="Clear search" aria-label="Clear search">&times;</button>
+            </div>
+
+            <!-- Vehicle Type Filter Pills -->
+            <div class="type-filter-group" id="typeFilterGroup">
+              <button class="filter-pill active" data-type="all">All Fleet</button>
+              <button class="filter-pill" data-type="Car">Cars</button>
+              <button class="filter-pill" data-type="SUV">SUVs (4WD)</button>
+              <button class="filter-pill" data-type="Bike">Bikes</button>
+            </div>
+          </div>
+
+          <!-- Secondary Filters Row -->
+          <div class="filter-bottom-row">
+            <!-- Availability Toggle -->
+            <div class="filter-item">
+              <label class="filter-label">Availability</label>
+              <select id="availabilityFilter" class="glass-select">
+                <option value="all">All Statuses</option>
+                <option value="available" selected>Available for Rent</option>
+                <option value="rented">Currently Rented</option>
+              </select>
+            </div>
+
+            <!-- Price Slider -->
+            <div class="filter-item price-filter-item">
+              <div class="price-header">
+                <label class="filter-label" for="priceRangeInput">Max Daily Rate</label>
+                <span class="price-display" id="priceRangeValue">$300/day</span>
+              </div>
+              <input type="range" id="priceRangeInput" min="15" max="300" step="5" value="300" class="glass-slider">
+            </div>
+
+            <!-- Sort By -->
+            <div class="filter-item">
+              <label class="filter-label">Sort By</label>
+              <select id="sortBySelect" class="glass-select">
+                <option value="recommended">Featured / Recommended</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="year-desc">Year: Newest First</option>
+                <option value="make-asc">Make: A to Z</option>
+              </select>
+            </div>
+
+            <!-- Active Pricing Mode Indicator -->
+            <div class="filter-item strategy-filter-item">
+              <label class="filter-label">Active Pricing Rule</label>
+              <div class="strategy-badge" id="strategyBadge">
+                <span class="strategy-badge-icon">&#9889;</span>
+                <span id="strategyBadgeText">Tiered Strategy (10% off 7+ days)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicle Catalog Grid -->
+        <div class="catalog-section">
+          <div class="catalog-header">
+            <h2 class="section-title">
+              Available Fleet <span class="counter-badge" id="catalogResultsCount">0 vehicles</span>
+            </h2>
+            <div class="view-toggles">
+              <button class="view-btn active" id="gridViewBtn" title="Grid View" aria-label="Grid View">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              </button>
+              <button class="view-btn" id="compactViewBtn" title="Compact View" aria-label="Compact View">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic Vehicle Cards Container -->
+          <div class="vehicles-grid" id="vehiclesGrid">
+            <!-- Injected by JavaScript -->
+          </div>
+
+          <!-- Empty State (Hidden by default) -->
+          <div class="empty-state glass-card" id="emptyFleetState" style="display: none;">
+            <div class="empty-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            </div>
+            <h3>No Vehicles Found</h3>
+            <p>Try adjusting your search criteria, price range, or category filter to discover more vehicles.</p>
+            <button class="btn btn-secondary" id="resetFiltersBtn">Reset All Filters</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: ACTIVE RENTALS & RETURNS ==================== -->
+      <section class="tab-pane" id="tabRentals">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Active & Completed Leases</h1>
+            <p class="page-subtitle">Track live vehicle dispatches, settle returns, and compute automatic late fee adjustments.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-glass" id="refreshRentalsBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              <span>Refresh Records</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Rental Status Summary Cards -->
+        <div class="rentals-metrics-grid">
+          <div class="glass-card metric-card">
+            <div class="metric-icon-bubble bg-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Active Dispatches</span>
+              <span class="metric-value text-accent" id="metricActiveRentalsCount">0</span>
+            </div>
+          </div>
+          <div class="glass-card metric-card">
+            <div class="metric-icon-bubble bg-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Completed Returns</span>
+              <span class="metric-value text-success" id="metricCompletedRentalsCount">0</span>
+            </div>
+          </div>
+          <div class="glass-card metric-card">
+            <div class="metric-icon-bubble bg-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Total Rental Revenue</span>
+              <span class="metric-value text-purple" id="metricTotalBilledRevenue">$0</span>
+            </div>
+          </div>
+          <div class="glass-card metric-card">
+            <div class="metric-icon-bubble bg-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Late Penalties Accrued</span>
+              <span class="metric-value text-amber" id="metricLateFeesCount">$0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rentals Table Container -->
+        <div class="glass-panel table-panel">
+          <div class="table-toolbar">
+            <div class="table-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="rentalSearchInput" placeholder="Filter by customer name, vehicle, or rental ID..." class="glass-input">
+            </div>
+            <div class="table-filter-toggles">
+              <button class="filter-pill active" data-rental-filter="all">All</button>
+              <button class="filter-pill" data-rental-filter="active">Active Only</button>
+              <button class="filter-pill" data-rental-filter="closed">Returned</button>
+            </div>
+          </div>
+
+          <div class="responsive-table-wrapper">
+            <table class="glass-table" id="rentalsTable">
+              <thead>
+                <tr>
+                  <th>Rental Ref</th>
+                  <th>Vehicle Details</th>
+                  <th>Customer</th>
+                  <th>Start Date</th>
+                  <th>Duration</th>
+                  <th>Base Rate</th>
+                  <th>Status</th>
+                  <th>Total Settled</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="rentalsTableBody">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty Rentals State -->
+          <div class="empty-state" id="emptyRentalsState" style="display: none; padding: 40px 20px;">
+            <p>No rental agreements matching current filter.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: CUSTOMER DIRECTORY ==================== -->
+      <section class="tab-pane" id="tabCustomers">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Registered Customer Registry</h1>
+            <p class="page-subtitle">Validated driver licenses, identity verification, and client rental histories.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-primary" id="openRegisterCustomerModalBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+              <span>Register New Driver</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-panel">
+          <div class="customers-grid" id="customersGrid">
+            <!-- Injected by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 4: ANALYTICS & HUB ==================== -->
+      <section class="tab-pane" id="tabAnalytics">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Fleet Intelligence & System Hub</h1>
+            <p class="page-subtitle">Real-time telemetrics, pricing algorithm controls, and system persistence sync.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-secondary" id="exportJsonBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Export JSON File</span>
+            </button>
+            <label class="btn btn-glass" for="importJsonInput" style="cursor: pointer;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <span>Import JSON</span>
+              <input type="file" id="importJsonInput" accept=".json" style="display: none;">
+            </label>
+            <button class="btn btn-danger-glass" id="resetDataBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+              <span>Reset Demo State</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Strategy Selector & OOP Showcase Card -->
+        <div class="analytics-card-grid">
+          <div class="glass-card feature-showcase-card">
+            <div class="card-badge">OOP Core Principles</div>
+            <h3 class="card-heading">Polymorphism & Pricing Strategy</h3>
+            <p class="card-desc">
+              The rental calculation engine supports swappable pricing strategies via the Strategy Pattern, with automatic polymorphic dispatch across vehicle classes:
+            </p>
+            <ul class="oop-specs-list">
+              <li>
+                <span class="oop-badge">Polymorphism</span>
+                <span><strong>SUV Surcharge (+15%)</strong>: Overrides <code>get_rate()</code> to compute <code>base_rate * 1.15</code> for 4WD & 7-seater vehicles.</span>
+              </li>
+              <li>
+                <span class="oop-badge">Strategy</span>
+                <span><strong>Tiered Weekly Rate</strong>: Automatically applies a <strong>10% discount</strong> for rentals spanning 7 days or more.</span>
+              </li>
+              <li>
+                <span class="oop-badge">Encapsulation</span>
+                <span><strong>Late Fee Protection</strong>: Returns outside planned schedule automatically apply a <strong>20% daily surcharge</strong> penalty.</span>
+              </li>
+            </ul>
+
+            <div class="strategy-toggle-box">
+              <span class="strategy-toggle-title">System Pricing Algorithm:</span>
+              <div class="strategy-options">
+                <label class="strategy-radio-label">
+                  <input type="radio" name="systemStrategy" value="tiered" checked id="strategyRadioTiered">
+                  <div class="radio-card">
+                    <span class="radio-name">Tiered Rate Strategy (Recommended)</span>
+                    <span class="radio-desc">Base rate * days, with automatic 10% discount for >= 7 days</span>
+                  </div>
+                </label>
+                <label class="strategy-radio-label">
+                  <input type="radio" name="systemStrategy" value="flat" id="strategyRadioFlat">
+                  <div class="radio-card">
+                    <span class="radio-name">Flat Rate Strategy</span>
+                    <span class="radio-desc">Linear calculation: Daily Rate &times; Days with no tier reduction</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fleet Utilization Chart / Breakdown -->
+          <div class="glass-card feature-showcase-card">
+            <div class="card-badge">Fleet Utilization</div>
+            <h3 class="card-heading">Category Distribution & Status</h3>
+            <div class="utilization-bars-wrap">
+              <div class="bar-group">
+                <div class="bar-label-row">
+                  <span>Overall Fleet Utilization</span>
+                  <span id="utilizationPercentText">0%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill" id="utilizationProgressBar" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="category-breakdown-list" id="categoryBreakdownList">
+                <!-- Dynamically rendered -->
+              </div>
+            </div>
+
+            <div class="system-sync-card">
+              <div class="sync-status">
+                <span class="status-indicator online"></span>
+                <span>In-Memory & LocalStorage Persistence: Active</span>
+              </div>
+              <small class="sync-note">Data changes persist in your browser and seamlessly export to <code>rental_system.py</code> JSON structure.</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Glassmorphic Footer -->
+    <footer class="glass-footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <span class="footer-logo">AURA<span class="accent-text">DRIVE</span></span>
+          <span class="footer-copy">&copy; 2026 Car Rental System. Designed with pure Glassmorphism, modern CSS3 &amp; ES6+.</span>
+        </div>
+        <div class="footer-right">
+          <span class="footer-pill">Author: <strong>Dilli Ram Chaudhary</strong></span>
+          <span class="footer-pill">Architecture: <strong>Python OOP + Modern Web UI</strong></span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==================== MODAL 1: RENT VEHICLE ==================== -->
+  <dialog class="glass-modal" id="rentModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <span class="modal-pretitle">Rental Dispatch Protocol</span>
+          <h2 class="modal-title" id="rentModalVehicleTitle">Rent Vehicle</h2>
+        </div>
+        <button class="modal-close-btn" id="closeRentModalBtn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="rentForm" class="modal-form">
+        <!-- Selected Vehicle Summary Preview Card -->
+        <div class="modal-vehicle-preview" id="rentVehiclePreview">
+          <!-- Injected via JS -->
+        </div>
+
+        <div class="form-grid">
+          <!-- Customer Selection or Create -->
+          <div class="form-group full-width">
+            <label class="form-label" for="rentCustomerSelect">Driver / Customer Account <span class="required">*</span></label>
+            <div class="input-with-action">
+              <select id="rentCustomerSelect" class="glass-select" required>
+                <option value="">-- Choose a registered driver --</option>
+              </select>
+              <button type="button" class="btn btn-glass-sm" id="rentQuickAddCustomerBtn" title="Register New Driver">+ New</button>
+            </div>
+            <small class="form-hint" id="rentCustomerHint">Driver must possess a valid, non-empty driving license.</small>
+          </div>
+
+          <!-- Start Date -->
+          <div class="form-group">
+            <label class="form-label" for="rentStartDate">Pickup / Start Date <span class="required">*</span></label>
+            <input type="date" id="rentStartDate" class="glass-input" required>
+          </div>
+
+          <!-- Planned Days -->
+          <div class="form-group">
+            <label class="form-label" for="rentDaysInput">Duration (Days) <span class="required">*</span></label>
+            <div class="number-stepper">
+              <button type="button" class="stepper-btn" id="stepperMinus">&minus;</button>
+              <input type="number" id="rentDaysInput" class="glass-input stepper-input" min="1" max="90" value="3" required>
+              <button type="button" class="stepper-btn" id="stepperPlus">&plus;</button>
+            </div>
+            <small class="form-hint">Tip: Rentals of 7+ days unlock a 10% tiered weekly discount!</small>
+          </div>
+        </div>
+
+        <!-- Live Price Calculation Breakdown Card -->
+        <div class="price-breakdown-card">
+          <div class="breakdown-header">
+            <span>Price Calculation Breakdown</span>
+            <span class="breakdown-strategy-badge" id="breakdownStrategyBadge">Tiered Strategy</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Base Daily Rate:</span>
+            <span id="breakdownDailyRate">$0.00/day</span>
+          </div>
+          <div class="breakdown-row" id="breakdownSurchargeRow" style="display: none;">
+            <span>SUV 4WD Surcharge (+15%):</span>
+            <span class="text-accent" id="breakdownSurcharge">+$0.00</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Rental Duration:</span>
+            <span id="breakdownDays">3 days</span>
+          </div>
+          <div class="breakdown-row" id="breakdownDiscountRow" style="display: none;">
+            <span class="text-success">Weekly Tier Discount (10% off):</span>
+            <span class="text-success" id="breakdownDiscount">-$0.00</span>
+          </div>
+          <div class="breakdown-divider"></div>
+          <div class="breakdown-row breakdown-total">
+            <span>Estimated Total:</span>
+            <span class="total-amount" id="breakdownTotal">$0.00</span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-glass" id="cancelRentBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="confirmRentBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Confirm & Dispatch Rental</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- ==================== MODAL 2: RETURN VEHICLE ==================== -->
+  <dialog class="glass-modal" id="returnModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <span class="modal-pretitle">Rental Check-in & Settle</span>
+          <h2 class="modal-title">Return Vehicle</h2>
+        </div>
+        <button class="modal-close-btn" id="closeReturnModalBtn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="returnForm" class="modal-form">
+        <input type="hidden" id="returnRentalId">
+
+        <div class="return-summary-card" id="returnSummaryCard">
+          <!-- Injected via JS -->
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="returnActualDate">Actual Return Date <span class="required">*</span></label>
+          <input type="date" id="returnActualDate" class="glass-input" required>
+          <small class="form-hint">Late return applies a 20% daily surcharge penalty on overdue days.</small>
+        </div>
+
+        <!-- Live Return Settlement Calculation Breakdown -->
+        <div class="price-breakdown-card">
+          <div class="breakdown-header">
+            <span>Final Settlement Calculation</span>
+            <span class="status-badge" id="returnStatusBadge">On Schedule</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Planned Days:</span>
+            <span id="returnPlannedDays">0 days</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Actual Days Elapsed:</span>
+            <span id="returnActualDays">0 days</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Base Rental Cost:</span>
+            <span id="returnBaseCost">$0.00</span>
+          </div>
+          <div class="breakdown-row text-amber" id="returnLateRow" style="display: none;">
+            <span>Late Fee Penalty (20% &times; Rate &times; Overdue Days):</span>
+            <span id="returnLateFee">+$0.00</span>
+          </div>
+          <div class="breakdown-divider"></div>
+          <div class="breakdown-row breakdown-total">
+            <span>Total Final Due:</span>
+            <span class="total-amount text-success" id="returnTotalDue">$0.00</span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-glass" id="cancelReturnBtn">Cancel</button>
+          <button type="submit" class="btn btn-success" id="confirmReturnBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <span>Complete Return & Generate Invoice</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- ==================== MODAL 3: ADD VEHICLE ==================== -->
+  <dialog class="glass-modal" id="addVehicleModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <span class="modal-pretitle">Fleet Expansion</span>
+          <h2 class="modal-title">Add Vehicle to Fleet</h2>
+        </div>
+        <button class="modal-close-btn" id="closeAddVehicleModalBtn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="addVehicleForm" class="modal-form">
+        <div class="form-grid">
+          <!-- Vehicle Type Selector -->
+          <div class="form-group full-width">
+            <label class="form-label">Vehicle Classification <span class="required">*</span></label>
+            <div class="type-selection-cards">
+              <label class="type-card-label">
+                <input type="radio" name="newVehicleType" value="Car" checked>
+                <div class="type-card">
+                  <span class="type-card-icon">&#128663;</span>
+                  <span class="type-card-name">Car (Sedan)</span>
+                  <span class="type-card-desc">Standard 4-seater</span>
+                </div>
+              </label>
+              <label class="type-card-label">
+                <input type="radio" name="newVehicleType" value="SUV">
+                <div class="type-card">
+                  <span class="type-card-icon">&#128665;</span>
+                  <span class="type-card-name">SUV (7 Seats)</span>
+                  <span class="type-card-desc">+15% Polymorphic rate</span>
+                </div>
+              </label>
+              <label class="type-card-label">
+                <input type="radio" name="newVehicleType" value="Bike">
+                <div class="type-card">
+                  <span class="type-card-icon">&#127949;&#65039;</span>
+                  <span class="type-card-name">Motorbike</span>
+                  <span class="type-card-desc">Agile &amp; Sporty</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Make -->
+          <div class="form-group">
+            <label class="form-label" for="newMake">Manufacturer / Make <span class="required">*</span></label>
+            <input type="text" id="newMake" class="glass-input" placeholder="e.g. Porsche, Tesla, Toyota" required>
+          </div>
+
+          <!-- Model -->
+          <div class="form-group">
+            <label class="form-label" for="newModel">Model Name <span class="required">*</span></label>
+            <input type="text" id="newModel" class="glass-input" placeholder="e.g. Taycan, Model 3, RAV4" required>
+          </div>
+
+          <!-- Year -->
+          <div class="form-group">
+            <label class="form-label" for="newYear">Manufacturing Year <span class="required">*</span></label>
+            <input type="number" id="newYear" class="glass-input" min="2000" max="2027" value="2024" required>
+          </div>
+
+          <!-- Base Rate -->
+          <div class="form-group">
+            <label class="form-label" for="newBaseRate">Base Rate / Day ($) <span class="required">*</span></label>
+            <input type="number" id="newBaseRate" class="glass-input" min="10" max="2000" step="0.5" value="65.0" required>
+          </div>
+
+          <!-- Dynamic Type-specific Fields -->
+          <div class="form-group" id="seatsFieldGroup">
+            <label class="form-label" for="newSeats">Seating Capacity</label>
+            <input type="number" id="newSeats" class="glass-input" min="1" max="12" value="4">
+          </div>
+
+          <div class="form-group" id="suv4wdGroup" style="display: none;">
+            <label class="form-label">Drivetrain</label>
+            <label class="glass-checkbox-label">
+              <input type="checkbox" id="newFourWheelDrive" checked>
+              <span>Equipped with 4-Wheel Drive (4WD/AWD)</span>
+            </label>
+          </div>
+
+          <!-- Image URL with Presets -->
+          <div class="form-group full-width">
+            <label class="form-label" for="newImageUrl">Image URL (Optional)</label>
+            <input type="url" id="newImageUrl" class="glass-input" placeholder="https://images.unsplash.com/photo-...">
+            <div class="preset-images-row">
+              <span class="preset-label">Quick Presets:</span>
+              <button type="button" class="preset-img-btn" data-preset="sedan">Luxury Sedan</button>
+              <button type="button" class="preset-img-btn" data-preset="suv">Premium SUV</button>
+              <button type="button" class="preset-img-btn" data-preset="sports">Supercar</button>
+              <button type="button" class="preset-img-btn" data-preset="bike">Sport Bike</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-glass" id="cancelAddVehicleBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Add Vehicle to Fleet</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- ==================== MODAL 4: REGISTER CUSTOMER ==================== -->
+  <dialog class="glass-modal" id="customerModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <span class="modal-pretitle">Driver Identity</span>
+          <h2 class="modal-title">Register Driver Account</h2>
+        </div>
+        <button class="modal-close-btn" id="closeCustomerModalBtn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="customerForm" class="modal-form">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label class="form-label" for="custName">Full Legal Name <span class="required">*</span></label>
+            <input type="text" id="custName" class="glass-input" placeholder="e.g. Alisha Shrestha" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label" for="custLicense">Driver License Number <span class="required">*</span></label>
+            <input type="text" id="custLicense" class="glass-input" placeholder="e.g. DL-98412-NP" required>
+            <small class="form-hint">System verifies license string presence before enabling rental dispatch.</small>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="custEmail">Email Address</label>
+            <input type="email" id="custEmail" class="glass-input" placeholder="alisha@example.com">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="custPhone">Phone Number</label>
+            <input type="tel" id="custPhone" class="glass-input" placeholder="+977 9800000000">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-glass" id="cancelCustomerBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Register & Validate</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- ==================== MODAL 5: VEHICLE DETAILS QUICK VIEW ==================== -->
+  <dialog class="glass-modal" id="detailsModal">
+    <div class="modal-card modal-card-wide">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <span class="modal-pretitle">Fleet Specification Sheet</span>
+          <h2 class="modal-title" id="detailsTitle">Vehicle Details</h2>
+        </div>
+        <button class="modal-close-btn" id="closeDetailsModalBtn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div class="details-body" id="detailsBody">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ==================== MODAL 6: DIGITAL INVOICE RECEIPT ==================== -->
+  <dialog class="glass-modal" id="invoiceModal">
+    <div class="modal-card">
+      <div class="modal-header invoice-header-print">
+        <div class="modal-header-info">
+          <span class="modal-pretitle">Official Rental Invoice</span>
+          <h2 class="modal-title">Receipt &amp; Settlement</h2>
+        </div>
+        <button class="modal-close-btn" id="closeInvoiceModalBtn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div class="invoice-content" id="invoiceContent">
+        <!-- Injected dynamically -->
+      </div>
+
+      <div class="modal-footer invoice-footer">
+        <button type="button" class="btn btn-glass" id="closeInvoiceBtn">Done</button>
+        <button type="button" class="btn btn-primary" id="printInvoiceBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          <span>Print / Save Receipt</span>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- JavaScript Application Entry -->
+  <script src="app.js"></script>
+</body>
+</html>
