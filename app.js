@@ -1744,3 +1744,4 @@ class RentalApp {
 window.addEventListener('DOMContentLoaded', () => {
   window.app = new RentalApp();
 });
+
