@@ -767,7 +767,7 @@ class RentalApp {
         // Print Receipt
         const printInvoiceBtn = document.getElementById('printInvoiceBtn');
         if (printInvoiceBtn) {
-          printInvoiceBtn.addEventListener('click', () => window.print());
+          printInvoiceBtn.addEventListener('click', () => this.printReceipt());
         }
       }
 
