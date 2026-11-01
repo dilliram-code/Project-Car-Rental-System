@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>AuraDrive | Next-Gen Glassmorphic Car Rental System</title>
-  <meta name="description" content="Ultra-modern, glassmorphic car rental system with smart pricing, real-time fleet analytics, and instant vehicle booking.">
+  <meta name="description"
+    content="Ultra-modern, glassmorphic car rental system with smart pricing, real-time fleet analytics, and instant vehicle booking.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <!-- Ambient Animated Light Orbs for Glassmorphism Depth -->
   <div class="ambient-background" aria-hidden="true">
@@ -27,7 +32,9 @@
         <div class="brand">
           <div class="brand-icon-wrapper">
             <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2"></path>
+              <path
+                d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2">
+              </path>
               <circle cx="7" cy="17" r="2"></circle>
               <path d="M9 17h6"></path>
               <circle cx="17" cy="17" r="2"></circle>
@@ -43,48 +50,92 @@
         <!-- Desktop Navigation Tabs -->
         <nav class="nav-links" id="mainNav">
           <button class="nav-tab active" data-tab="fleet">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2" />
+              <circle cx="7" cy="17" r="2" />
+              <circle cx="17" cy="17" r="2" />
+            </svg>
             <span>Explore Fleet</span>
           </button>
           <button class="nav-tab" data-tab="rentals">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
             <span>Active Rentals</span>
             <span class="tab-badge" id="activeRentalsBadge">0</span>
           </button>
           <button class="nav-tab" data-tab="customers">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
             <span>Customers</span>
           </button>
           <button class="nav-tab" data-tab="analytics">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
             <span>Analytics & Hub</span>
           </button>
         </nav>
 
         <!-- Right Quick Actions -->
         <div class="nav-actions">
-          <button class="btn btn-glass-icon" id="themeToggleBtn" title="Toggle Dark / Light Glass Mode" aria-label="Toggle Theme">
-            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <button class="btn btn-glass-icon" id="themeToggleBtn" title="Toggle Dark / Light Glass Mode"
+            aria-label="Toggle Theme">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
           </button>
 
           <button class="btn btn-primary" id="openAddVehicleModalBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
             <span class="btn-text">Add Vehicle</span>
           </button>
 
           <!-- Mobile Hamburger Menu Button -->
-          <button class="btn btn-glass-icon mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
-            <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            <svg class="close-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-          </button>
+            <button class="btn btn-glass-icon mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu"
+              aria-expanded="false">
+              <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+              <svg class="close-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
         </div>
       </div>
 
       <!-- Mobile Dropdown Navigation -->
       <div class="mobile-nav-drawer" id="mobileDrawer">
         <button class="mobile-nav-link active" data-tab="fleet">Explore Fleet</button>
-        <button class="mobile-nav-link" data-tab="rentals">Active Rentals (<span id="mobileRentalsBadge">0</span>)</button>
+        <button class="mobile-nav-link" data-tab="rentals">Active Rentals (<span
+            id="mobileRentalsBadge">0</span>)</button>
         <button class="mobile-nav-link" data-tab="customers">Customer Directory</button>
         <button class="mobile-nav-link" data-tab="analytics">Analytics & JSON Hub</button>
       </div>
@@ -106,7 +157,8 @@
               Drive Tomorrow, <span class="gradient-text">Today</span>.
             </h1>
             <p class="hero-description">
-              Experience frictionless vehicle rentals powered by real-time polymorphic pricing, tiered weekly savings, and late-fee protection. Cars, luxury 4WD SUVs, and city sport bikes at your fingertips.
+              Experience frictionless vehicle rentals powered by real-time polymorphic pricing, tiered weekly savings,
+              and late-fee protection. Cars, luxury 4WD SUVs, and city sport bikes at your fingertips.
             </p>
             <div class="hero-stats-row">
               <div class="hero-stat-item">
@@ -132,7 +184,8 @@
           </div>
           <div class="hero-visual">
             <div class="hero-car-glow"></div>
-            <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=900&q=80" alt="Futuristic sports car" class="hero-car-img" loading="eager">
+            <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=900&q=80"
+              alt="Futuristic sports car" class="hero-car-img" loading="eager">
           </div>
         </div>
 
@@ -145,8 +198,10 @@
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input type="text" id="vehicleSearchInput" placeholder="Search by make, model, year, or features..." class="glass-input search-input">
-              <button class="clear-search-btn" id="clearSearchBtn" title="Clear search" aria-label="Clear search">&times;</button>
+              <input type="text" id="vehicleSearchInput" placeholder="Search by make, model, year, or features..."
+                class="glass-input search-input">
+              <button class="clear-search-btn" id="clearSearchBtn" title="Clear search"
+                aria-label="Clear search">&times;</button>
             </div>
 
             <!-- Vehicle Type Filter Pills -->
@@ -210,10 +265,22 @@
             </h2>
             <div class="view-toggles">
               <button class="view-btn active" id="gridViewBtn" title="Grid View" aria-label="Grid View">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
               </button>
               <button class="view-btn" id="compactViewBtn" title="Compact View" aria-label="Compact View">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
               </button>
             </div>
           </div>
@@ -226,7 +293,11 @@
           <!-- Empty State (Hidden by default) -->
           <div class="empty-state glass-card" id="emptyFleetState" style="display: none;">
             <div class="empty-icon-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
             </div>
             <h3>No Vehicles Found</h3>
             <p>Try adjusting your search criteria, price range, or category filter to discover more vehicles.</p>
@@ -240,11 +311,16 @@
         <div class="page-header">
           <div>
             <h1 class="page-title">Active & Completed Leases</h1>
-            <p class="page-subtitle">Track live vehicle dispatches, settle returns, and compute automatic late fee adjustments.</p>
+            <p class="page-subtitle">Track live vehicle dispatches, settle returns, and compute automatic late fee
+              adjustments.</p>
           </div>
           <div class="page-header-actions">
             <button class="btn btn-glass" id="refreshRentalsBtn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <polyline points="1 20 1 14 7 14"></polyline>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+              </svg>
               <span>Refresh Records</span>
             </button>
           </div>
@@ -254,7 +330,10 @@
         <div class="rentals-metrics-grid">
           <div class="glass-card metric-card">
             <div class="metric-icon-bubble bg-cyan">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
             </div>
             <div class="metric-info">
               <span class="metric-label">Active Dispatches</span>
@@ -263,7 +342,10 @@
           </div>
           <div class="glass-card metric-card">
             <div class="metric-icon-bubble bg-green">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
             </div>
             <div class="metric-info">
               <span class="metric-label">Completed Returns</span>
@@ -272,7 +354,10 @@
           </div>
           <div class="glass-card metric-card">
             <div class="metric-icon-bubble bg-purple">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
             </div>
             <div class="metric-info">
               <span class="metric-label">Total Rental Revenue</span>
@@ -281,7 +366,12 @@
           </div>
           <div class="glass-card metric-card">
             <div class="metric-icon-bubble bg-amber">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                </path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
             </div>
             <div class="metric-info">
               <span class="metric-label">Late Penalties Accrued</span>
@@ -294,8 +384,12 @@
         <div class="glass-panel table-panel">
           <div class="table-toolbar">
             <div class="table-search">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              <input type="text" id="rentalSearchInput" placeholder="Filter by customer name, vehicle, or rental ID..." class="glass-input">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="rentalSearchInput" placeholder="Filter by customer name, vehicle, or rental ID..."
+                class="glass-input">
             </div>
             <div class="table-filter-toggles">
               <button class="filter-pill active" data-rental-filter="all">All</button>
@@ -341,7 +435,12 @@
           </div>
           <div class="page-header-actions">
             <button class="btn btn-primary" id="openRegisterCustomerModalBtn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+              </svg>
               <span>Register New Driver</span>
             </button>
           </div>
@@ -363,16 +462,27 @@
           </div>
           <div class="page-header-actions">
             <button class="btn btn-secondary" id="exportJsonBtn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
               <span>Export JSON File</span>
             </button>
             <label class="btn btn-glass" for="importJsonInput" style="cursor: pointer;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
               <span>Import JSON</span>
               <input type="file" id="importJsonInput" accept=".json" style="display: none;">
             </label>
             <button class="btn btn-danger-glass" id="resetDataBtn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
               <span>Reset Demo State</span>
             </button>
           </div>
@@ -384,20 +494,24 @@
             <div class="card-badge">OOP Core Principles</div>
             <h3 class="card-heading">Polymorphism & Pricing Strategy</h3>
             <p class="card-desc">
-              The rental calculation engine supports swappable pricing strategies via the Strategy Pattern, with automatic polymorphic dispatch across vehicle classes:
+              The rental calculation engine supports swappable pricing strategies via the Strategy Pattern, with
+              automatic polymorphic dispatch across vehicle classes:
             </p>
             <ul class="oop-specs-list">
               <li>
                 <span class="oop-badge">Polymorphism</span>
-                <span><strong>SUV Surcharge (+15%)</strong>: Overrides <code>get_rate()</code> to compute <code>base_rate * 1.15</code> for 4WD & 7-seater vehicles.</span>
+                <span><strong>SUV Surcharge (+15%)</strong>: Overrides <code>get_rate()</code> to compute
+                  <code>base_rate * 1.15</code> for 4WD & 7-seater vehicles.</span>
               </li>
               <li>
                 <span class="oop-badge">Strategy</span>
-                <span><strong>Tiered Weekly Rate</strong>: Automatically applies a <strong>10% discount</strong> for rentals spanning 7 days or more.</span>
+                <span><strong>Tiered Weekly Rate</strong>: Automatically applies a <strong>10% discount</strong> for
+                  rentals spanning 7 days or more.</span>
               </li>
               <li>
                 <span class="oop-badge">Encapsulation</span>
-                <span><strong>Late Fee Protection</strong>: Returns outside planned schedule automatically apply a <strong>20% daily surcharge</strong> penalty.</span>
+                <span><strong>Late Fee Protection</strong>: Returns outside planned schedule automatically apply a
+                  <strong>20% daily surcharge</strong> penalty.</span>
               </li>
             </ul>
 
@@ -447,7 +561,8 @@
                 <span class="status-indicator online"></span>
                 <span>In-Memory & LocalStorage Persistence: Active</span>
               </div>
-              <small class="sync-note">Data changes persist in your browser and seamlessly export to <code>rental_system.py</code> JSON structure.</small>
+              <small class="sync-note">Data changes persist in your browser and seamlessly export to
+                <code>rental_system.py</code> JSON structure.</small>
             </div>
           </div>
         </div>
@@ -460,7 +575,8 @@
       <div class="footer-container">
         <div class="footer-left">
           <span class="footer-logo">AURA<span class="accent-text">DRIVE</span></span>
-          <span class="footer-copy">&copy; 2026 Car Rental System. Designed with pure Glassmorphism, modern CSS3 &amp; ES6+.</span>
+          <span class="footer-copy">&copy; 2026 Car Rental System. Designed with pure Glassmorphism, modern CSS3 &amp;
+            ES6+.</span>
         </div>
         <div class="footer-right">
           <span class="footer-pill">Author: <strong>Dilli Ram Chaudhary</strong></span>
@@ -490,14 +606,17 @@
         <div class="form-grid">
           <!-- Customer Selection or Create -->
           <div class="form-group full-width">
-            <label class="form-label" for="rentCustomerSelect">Driver / Customer Account <span class="required">*</span></label>
+            <label class="form-label" for="rentCustomerSelect">Driver / Customer Account <span
+                class="required">*</span></label>
             <div class="input-with-action">
               <select id="rentCustomerSelect" class="glass-select" required>
                 <option value="">-- Choose a registered driver --</option>
               </select>
-              <button type="button" class="btn btn-glass-sm" id="rentQuickAddCustomerBtn" title="Register New Driver">+ New</button>
+              <button type="button" class="btn btn-glass-sm" id="rentQuickAddCustomerBtn" title="Register New Driver">+
+                New</button>
             </div>
-            <small class="form-hint" id="rentCustomerHint">Driver must possess a valid, non-empty driving license.</small>
+            <small class="form-hint" id="rentCustomerHint">Driver must possess a valid, non-empty driving
+              license.</small>
           </div>
 
           <!-- Start Date -->
@@ -511,7 +630,8 @@
             <label class="form-label" for="rentDaysInput">Duration (Days) <span class="required">*</span></label>
             <div class="number-stepper">
               <button type="button" class="stepper-btn" id="stepperMinus">&minus;</button>
-              <input type="number" id="rentDaysInput" class="glass-input stepper-input" min="1" max="90" value="3" required>
+              <input type="number" id="rentDaysInput" class="glass-input stepper-input" min="1" max="90" value="3"
+                required>
               <button type="button" class="stepper-btn" id="stepperPlus">&plus;</button>
             </div>
             <small class="form-hint">Tip: Rentals of 7+ days unlock a 10% tiered weekly discount!</small>
@@ -550,7 +670,9 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-glass" id="cancelRentBtn">Cancel</button>
           <button type="submit" class="btn btn-primary" id="confirmRentBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
             <span>Confirm & Dispatch Rental</span>
           </button>
         </div>
@@ -614,7 +736,10 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-glass" id="cancelReturnBtn">Cancel</button>
           <button type="submit" class="btn btn-success" id="confirmReturnBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
             <span>Complete Return & Generate Invoice</span>
           </button>
         </div>
@@ -687,7 +812,8 @@
           <!-- Base Rate -->
           <div class="form-group">
             <label class="form-label" for="newBaseRate">Base Rate / Day ($) <span class="required">*</span></label>
-            <input type="number" id="newBaseRate" class="glass-input" min="10" max="2000" step="0.5" value="65.0" required>
+            <input type="number" id="newBaseRate" class="glass-input" min="10" max="2000" step="0.5" value="65.0"
+              required>
           </div>
 
           <!-- Dynamic Type-specific Fields -->
@@ -721,7 +847,10 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-glass" id="cancelAddVehicleBtn">Cancel</button>
           <button type="submit" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
             <span>Add Vehicle to Fleet</span>
           </button>
         </div>
@@ -767,7 +896,9 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-glass" id="cancelCustomerBtn">Cancel</button>
           <button type="submit" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
             <span>Register & Validate</span>
           </button>
         </div>
@@ -810,7 +941,11 @@
       <div class="modal-footer invoice-footer">
         <button type="button" class="btn btn-glass" id="closeInvoiceBtn">Done</button>
         <button type="button" class="btn btn-primary" id="printInvoiceBtn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
           <span>Print / Save Receipt</span>
         </button>
       </div>
@@ -823,5 +958,5 @@
   <!-- JavaScript Application Entry -->
   <script src="app.js"></script>
 </body>
-</html>
 
+</html>

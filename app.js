@@ -448,484 +448,484 @@ class RentalApp {
 
     // Mobile Hamburger
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileDrawer = document.getElementById('mobileDrawer');
-    if (mobileMenuBtn && mobileDrawer) {
-      mobileMenuBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = mobileDrawer.classList.toggle('open');
-        mobileMenuBtn.classList.toggle('active', isOpen);
-        mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        if (mobileMenuBtn && mobileDrawer) {
+          mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = mobileDrawer.classList.toggle('open');
+            mobileMenuBtn.classList.toggle('active', isOpen);
+            mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          });
 
-      // Close mobile drawer when clicking anywhere outside
-      document.addEventListener('click', (e) => {
-        if (mobileDrawer.classList.contains('open')) {
-          if (!mobileDrawer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-            mobileDrawer.classList.remove('open');
-            mobileMenuBtn.classList.remove('active');
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-          }
+          // Close mobile drawer when clicking anywhere outside
+          document.addEventListener('click', (e) => {
+            if (mobileDrawer.classList.contains('open')) {
+              if (!mobileDrawer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileDrawer.classList.remove('open');
+                mobileMenuBtn.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+              }
+            }
+          });
         }
-      });
-    }
 
-    // Theme Toggle
-    const themeBtn = document.getElementById('themeToggleBtn');
-    if (themeBtn) {
-      themeBtn.addEventListener('click', () => this.toggleTheme());
-    }
-
-    // Search and Filters
-    const searchInput = document.getElementById('vehicleSearchInput');
-    const clearSearchBtn = document.getElementById('clearSearchBtn');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        this.searchQuery = e.target.value.trim().toLowerCase();
-        clearSearchBtn.style.display = this.searchQuery ? 'flex' : 'none';
-        this.renderFleet();
-      });
-    }
-
-    if (clearSearchBtn) {
-      clearSearchBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        this.searchQuery = '';
-        clearSearchBtn.style.display = 'none';
-        this.renderFleet();
-      });
-    }
-
-    // Type filter pills
-    const typePills = document.querySelectorAll('#typeFilterGroup .filter-pill');
-    typePills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        typePills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        this.typeFilter = pill.dataset.type;
-        this.renderFleet();
-      });
-    });
-
-    // Availability Filter
-    const availFilter = document.getElementById('availabilityFilter');
-    if (availFilter) {
-      availFilter.addEventListener('change', (e) => {
-        this.availabilityFilter = e.target.value;
-        this.renderFleet();
-      });
-    }
-
-    // Price Slider
-    const priceSlider = document.getElementById('priceRangeInput');
-    const priceDisplay = document.getElementById('priceRangeValue');
-    if (priceSlider) {
-      priceSlider.addEventListener('input', (e) => {
-        this.maxPrice = Number(e.target.value);
-        priceDisplay.textContent = `$${this.maxPrice}/day`;
-        this.renderFleet();
-      });
-    }
-
-    // Sort Dropdown
-    const sortSelect = document.getElementById('sortBySelect');
-    if (sortSelect) {
-      sortSelect.addEventListener('change', (e) => {
-        this.sortBy = e.target.value;
-        this.renderFleet();
-      });
-    }
-
-    // Grid / Compact View Toggles
-    const gridBtn = document.getElementById('gridViewBtn');
-    const compactBtn = document.getElementById('compactViewBtn');
-    if (gridBtn && compactBtn) {
-      gridBtn.addEventListener('click', () => {
-        gridBtn.classList.add('active');
-        compactBtn.classList.remove('active');
-        this.viewMode = 'grid';
-        document.getElementById('vehiclesGrid').classList.remove('compact-mode');
-      });
-      compactBtn.addEventListener('click', () => {
-        compactBtn.classList.add('active');
-        gridBtn.classList.remove('active');
-        this.viewMode = 'compact';
-        document.getElementById('vehiclesGrid').classList.add('compact-mode');
-      });
-    }
-
-    // Reset Filters button in Empty State
-    const resetFiltersBtn = document.getElementById('resetFiltersBtn');
-    if (resetFiltersBtn) {
-      resetFiltersBtn.addEventListener('click', () => {
-        this.searchQuery = '';
-        this.typeFilter = 'all';
-        this.availabilityFilter = 'all';
-        this.maxPrice = 300;
-        this.sortBy = 'recommended';
-
-        if (searchInput) searchInput.value = '';
-        if (priceSlider) priceSlider.value = 300;
-        if (priceDisplay) priceDisplay.textContent = '$300/day';
-        if (availFilter) availFilter.value = 'all';
-        if (sortSelect) sortSelect.value = 'recommended';
-
-        typePills.forEach(p => p.classList.toggle('active', p.dataset.type === 'all'));
-        this.renderFleet();
-      });
-    }
-
-    // Rentals Search & Filter
-    const rentalSearch = document.getElementById('rentalSearchInput');
-    if (rentalSearch) {
-      rentalSearch.addEventListener('input', () => this.renderRentals());
-    }
-
-    const rentalFilterPills = document.querySelectorAll('.table-filter-toggles .filter-pill');
-    rentalFilterPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        rentalFilterPills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        this.renderRentals();
-      });
-    });
-
-    // Refresh rentals button
-    const refreshRentalsBtn = document.getElementById('refreshRentalsBtn');
-    if (refreshRentalsBtn) {
-      refreshRentalsBtn.addEventListener('click', () => {
-        this.renderRentals();
-        this.showToast('Rental records synced.', 'info');
-      });
-    }
-
-    // Modals Open Buttons
-    const openAddVehicleBtn = document.getElementById('openAddVehicleModalBtn');
-    if (openAddVehicleBtn) {
-      openAddVehicleBtn.addEventListener('click', () => this.openAddVehicleModal());
-    }
-
-    const openCustBtn = document.getElementById('openRegisterCustomerModalBtn');
-    if (openCustBtn) {
-      openCustBtn.addEventListener('click', () => this.openCustomerModal());
-    }
-
-    // Add Vehicle Type Radios (show/hide 4WD or Seats)
-    const newTypeRadios = document.querySelectorAll('input[name="newVehicleType"]');
-    newTypeRadios.forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        const val = e.target.value;
-        const suvGroup = document.getElementById('suv4wdGroup');
-        const seatsInput = document.getElementById('newSeats');
-        const seatsGroup = document.getElementById('seatsFieldGroup');
-
-        if (val === 'SUV') {
-          suvGroup.style.display = 'block';
-          seatsGroup.style.display = 'flex';
-          seatsInput.value = '7';
-        } else if (val === 'Bike') {
-          suvGroup.style.display = 'none';
-          seatsGroup.style.display = 'none';
-        } else {
-          suvGroup.style.display = 'none';
-          seatsGroup.style.display = 'flex';
-          seatsInput.value = '4';
+        // Theme Toggle
+        const themeBtn = document.getElementById('themeToggleBtn');
+        if (themeBtn) {
+          themeBtn.addEventListener('click', () => this.toggleTheme());
         }
-      });
-    });
 
-    // Quick Image Presets in Add Vehicle Modal
-    const presetButtons = document.querySelectorAll('.preset-img-btn');
-    presetButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const p = btn.dataset.preset;
-        const imgInput = document.getElementById('newImageUrl');
-        if (p === 'sedan') imgInput.value = 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80';
-        if (p === 'suv') imgInput.value = 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=80';
-        if (p === 'sports') imgInput.value = 'https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=900&q=80';
-        if (p === 'bike') imgInput.value = 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=900&q=80';
-      });
-    });
-
-    // Add Vehicle Form Submit
-    const addVehicleForm = document.getElementById('addVehicleForm');
-    if (addVehicleForm) {
-      addVehicleForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        this.handleAddVehicleSubmit();
-      });
-    }
-
-    // Customer Form Submit
-    const customerForm = document.getElementById('customerForm');
-    if (customerForm) {
-      customerForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        this.handleCustomerSubmit();
-      });
-    }
-
-    // Modal Close buttons
-    this.setupModalDismissal('rentModal', 'closeRentModalBtn', 'cancelRentBtn');
-    this.setupModalDismissal('returnModal', 'closeReturnModalBtn', 'cancelReturnBtn');
-    this.setupModalDismissal('addVehicleModal', 'closeAddVehicleModalBtn', 'cancelAddVehicleBtn');
-    this.setupModalDismissal('customerModal', 'closeCustomerModalBtn', 'cancelCustomerBtn');
-    this.setupModalDismissal('detailsModal', 'closeDetailsModalBtn');
-    this.setupModalDismissal('invoiceModal', 'closeInvoiceModalBtn', 'closeInvoiceBtn');
-
-    // Steppers inside Rent Modal
-    const stepperMinus = document.getElementById('stepperMinus');
-    const stepperPlus = document.getElementById('stepperPlus');
-    const rentDaysInput = document.getElementById('rentDaysInput');
-
-    if (stepperMinus && stepperPlus && rentDaysInput) {
-      stepperMinus.addEventListener('click', () => {
-        let v = parseInt(rentDaysInput.value, 10) || 1;
-        if (v > 1) {
-          rentDaysInput.value = v - 1;
-          this.updateRentPricePreview();
+        // Search and Filters
+        const searchInput = document.getElementById('vehicleSearchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
+        if (searchInput) {
+          searchInput.addEventListener('input', (e) => {
+            this.searchQuery = e.target.value.trim().toLowerCase();
+            clearSearchBtn.style.display = this.searchQuery ? 'flex' : 'none';
+            this.renderFleet();
+          });
         }
-      });
-      stepperPlus.addEventListener('click', () => {
-        let v = parseInt(rentDaysInput.value, 10) || 1;
-        rentDaysInput.value = v + 1;
-        this.updateRentPricePreview();
-      });
-      rentDaysInput.addEventListener('input', () => this.updateRentPricePreview());
-    }
 
-    // Rent Form Customer Selection
-    const rentCustomerSelect = document.getElementById('rentCustomerSelect');
-    if (rentCustomerSelect) {
-      rentCustomerSelect.addEventListener('change', () => this.validateRentDriverStatus());
-    }
-
-    // Quick Add Driver from Rent Modal
-    const quickAddDriverBtn = document.getElementById('rentQuickAddCustomerBtn');
-    if (quickAddDriverBtn) {
-      quickAddDriverBtn.addEventListener('click', () => {
-        document.getElementById('rentModal').close();
-        this.openCustomerModal();
-      });
-    }
-
-    // Rent Form Submit
-    const rentForm = document.getElementById('rentForm');
-    if (rentForm) {
-      rentForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        this.handleRentSubmit();
-      });
-    }
-
-    // Return Date Live Calculation
-    const returnActualDateInput = document.getElementById('returnActualDate');
-    if (returnActualDateInput) {
-      returnActualDateInput.addEventListener('change', () => this.updateReturnPricePreview());
-    }
-
-    // Return Form Submit
-    const returnForm = document.getElementById('returnForm');
-    if (returnForm) {
-      returnForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        this.handleReturnSubmit();
-      });
-    }
-
-    // Strategy algorithm switcher in Analytics tab
-    const strategyRadios = document.querySelectorAll('input[name="systemStrategy"]');
-    strategyRadios.forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        this.setPricingStrategy(e.target.value);
-        this.renderFleet();
-        this.showToast(`Active algorithm switched to ${e.target.value.toUpperCase()} strategy.`, 'info');
-      });
-    });
-
-    // JSON Export Button
-    const exportBtn = document.getElementById('exportJsonBtn');
-    if (exportBtn) {
-      exportBtn.addEventListener('click', () => this.exportJSON());
-    }
-
-    // JSON Import
-    const importInput = document.getElementById('importJsonInput');
-    if (importInput) {
-      importInput.addEventListener('change', (e) => this.importJSON(e));
-    }
-
-    // Reset Data Button
-    const resetDataBtn = document.getElementById('resetDataBtn');
-    if (resetDataBtn) {
-      resetDataBtn.addEventListener('click', () => {
-        if (confirm('Restore default vehicles, customers, and sample rentals? All custom edits will be reset.')) {
-          this.resetToDefaults(true);
+        if (clearSearchBtn) {
+          clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            this.searchQuery = '';
+            clearSearchBtn.style.display = 'none';
+            this.renderFleet();
+          });
         }
-      });
-    }
 
-    // Print Receipt
-    const printInvoiceBtn = document.getElementById('printInvoiceBtn');
-    if (printInvoiceBtn) {
-      printInvoiceBtn.addEventListener('click', () => window.print());
-    }
-  }
+        // Type filter pills
+        const typePills = document.querySelectorAll('#typeFilterGroup .filter-pill');
+        typePills.forEach(pill => {
+          pill.addEventListener('click', () => {
+            typePills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            this.typeFilter = pill.dataset.type;
+            this.renderFleet();
+          });
+        });
+
+        // Availability Filter
+        const availFilter = document.getElementById('availabilityFilter');
+        if (availFilter) {
+          availFilter.addEventListener('change', (e) => {
+            this.availabilityFilter = e.target.value;
+            this.renderFleet();
+          });
+        }
+
+        // Price Slider
+        const priceSlider = document.getElementById('priceRangeInput');
+        const priceDisplay = document.getElementById('priceRangeValue');
+        if (priceSlider) {
+          priceSlider.addEventListener('input', (e) => {
+            this.maxPrice = Number(e.target.value);
+            priceDisplay.textContent = `$${this.maxPrice}/day`;
+            this.renderFleet();
+          });
+        }
+
+        // Sort Dropdown
+        const sortSelect = document.getElementById('sortBySelect');
+        if (sortSelect) {
+          sortSelect.addEventListener('change', (e) => {
+            this.sortBy = e.target.value;
+            this.renderFleet();
+          });
+        }
+
+        // Grid / Compact View Toggles
+        const gridBtn = document.getElementById('gridViewBtn');
+        const compactBtn = document.getElementById('compactViewBtn');
+        if (gridBtn && compactBtn) {
+          gridBtn.addEventListener('click', () => {
+            gridBtn.classList.add('active');
+            compactBtn.classList.remove('active');
+            this.viewMode = 'grid';
+            document.getElementById('vehiclesGrid').classList.remove('compact-mode');
+          });
+          compactBtn.addEventListener('click', () => {
+            compactBtn.classList.add('active');
+            gridBtn.classList.remove('active');
+            this.viewMode = 'compact';
+            document.getElementById('vehiclesGrid').classList.add('compact-mode');
+          });
+        }
+
+        // Reset Filters button in Empty State
+        const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+        if (resetFiltersBtn) {
+          resetFiltersBtn.addEventListener('click', () => {
+            this.searchQuery = '';
+            this.typeFilter = 'all';
+            this.availabilityFilter = 'all';
+            this.maxPrice = 300;
+            this.sortBy = 'recommended';
+
+            if (searchInput) searchInput.value = '';
+            if (priceSlider) priceSlider.value = 300;
+            if (priceDisplay) priceDisplay.textContent = '$300/day';
+            if (availFilter) availFilter.value = 'all';
+            if (sortSelect) sortSelect.value = 'recommended';
+
+            typePills.forEach(p => p.classList.toggle('active', p.dataset.type === 'all'));
+            this.renderFleet();
+          });
+        }
+
+        // Rentals Search & Filter
+        const rentalSearch = document.getElementById('rentalSearchInput');
+        if (rentalSearch) {
+          rentalSearch.addEventListener('input', () => this.renderRentals());
+        }
+
+        const rentalFilterPills = document.querySelectorAll('.table-filter-toggles .filter-pill');
+        rentalFilterPills.forEach(pill => {
+          pill.addEventListener('click', () => {
+            rentalFilterPills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            this.renderRentals();
+          });
+        });
+
+        // Refresh rentals button
+        const refreshRentalsBtn = document.getElementById('refreshRentalsBtn');
+        if (refreshRentalsBtn) {
+          refreshRentalsBtn.addEventListener('click', () => {
+            this.renderRentals();
+            this.showToast('Rental records synced.', 'info');
+          });
+        }
+
+        // Modals Open Buttons
+        const openAddVehicleBtn = document.getElementById('openAddVehicleModalBtn');
+        if (openAddVehicleBtn) {
+          openAddVehicleBtn.addEventListener('click', () => this.openAddVehicleModal());
+        }
+
+        const openCustBtn = document.getElementById('openRegisterCustomerModalBtn');
+        if (openCustBtn) {
+          openCustBtn.addEventListener('click', () => this.openCustomerModal());
+        }
+
+        // Add Vehicle Type Radios (show/hide 4WD or Seats)
+        const newTypeRadios = document.querySelectorAll('input[name="newVehicleType"]');
+        newTypeRadios.forEach(radio => {
+          radio.addEventListener('change', (e) => {
+            const val = e.target.value;
+            const suvGroup = document.getElementById('suv4wdGroup');
+            const seatsInput = document.getElementById('newSeats');
+            const seatsGroup = document.getElementById('seatsFieldGroup');
+
+            if (val === 'SUV') {
+              suvGroup.style.display = 'block';
+              seatsGroup.style.display = 'flex';
+              seatsInput.value = '7';
+            } else if (val === 'Bike') {
+              suvGroup.style.display = 'none';
+              seatsGroup.style.display = 'none';
+            } else {
+              suvGroup.style.display = 'none';
+              seatsGroup.style.display = 'flex';
+              seatsInput.value = '4';
+            }
+          });
+        });
+
+        // Quick Image Presets in Add Vehicle Modal
+        const presetButtons = document.querySelectorAll('.preset-img-btn');
+        presetButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const p = btn.dataset.preset;
+            const imgInput = document.getElementById('newImageUrl');
+            if (p === 'sedan') imgInput.value = 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80';
+            if (p === 'suv') imgInput.value = 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=80';
+            if (p === 'sports') imgInput.value = 'https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=900&q=80';
+            if (p === 'bike') imgInput.value = 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=900&q=80';
+          });
+        });
+
+        // Add Vehicle Form Submit
+        const addVehicleForm = document.getElementById('addVehicleForm');
+        if (addVehicleForm) {
+          addVehicleForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleAddVehicleSubmit();
+          });
+        }
+
+        // Customer Form Submit
+        const customerForm = document.getElementById('customerForm');
+        if (customerForm) {
+          customerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleCustomerSubmit();
+          });
+        }
+
+        // Modal Close buttons
+        this.setupModalDismissal('rentModal', 'closeRentModalBtn', 'cancelRentBtn');
+        this.setupModalDismissal('returnModal', 'closeReturnModalBtn', 'cancelReturnBtn');
+        this.setupModalDismissal('addVehicleModal', 'closeAddVehicleModalBtn', 'cancelAddVehicleBtn');
+        this.setupModalDismissal('customerModal', 'closeCustomerModalBtn', 'cancelCustomerBtn');
+        this.setupModalDismissal('detailsModal', 'closeDetailsModalBtn');
+        this.setupModalDismissal('invoiceModal', 'closeInvoiceModalBtn', 'closeInvoiceBtn');
+
+        // Steppers inside Rent Modal
+        const stepperMinus = document.getElementById('stepperMinus');
+        const stepperPlus = document.getElementById('stepperPlus');
+        const rentDaysInput = document.getElementById('rentDaysInput');
+
+        if (stepperMinus && stepperPlus && rentDaysInput) {
+          stepperMinus.addEventListener('click', () => {
+            let v = parseInt(rentDaysInput.value, 10) || 1;
+            if (v > 1) {
+              rentDaysInput.value = v - 1;
+              this.updateRentPricePreview();
+            }
+          });
+          stepperPlus.addEventListener('click', () => {
+            let v = parseInt(rentDaysInput.value, 10) || 1;
+            rentDaysInput.value = v + 1;
+            this.updateRentPricePreview();
+          });
+          rentDaysInput.addEventListener('input', () => this.updateRentPricePreview());
+        }
+
+        // Rent Form Customer Selection
+        const rentCustomerSelect = document.getElementById('rentCustomerSelect');
+        if (rentCustomerSelect) {
+          rentCustomerSelect.addEventListener('change', () => this.validateRentDriverStatus());
+        }
+
+        // Quick Add Driver from Rent Modal
+        const quickAddDriverBtn = document.getElementById('rentQuickAddCustomerBtn');
+        if (quickAddDriverBtn) {
+          quickAddDriverBtn.addEventListener('click', () => {
+            document.getElementById('rentModal').close();
+            this.openCustomerModal();
+          });
+        }
+
+        // Rent Form Submit
+        const rentForm = document.getElementById('rentForm');
+        if (rentForm) {
+          rentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleRentSubmit();
+          });
+        }
+
+        // Return Date Live Calculation
+        const returnActualDateInput = document.getElementById('returnActualDate');
+        if (returnActualDateInput) {
+          returnActualDateInput.addEventListener('change', () => this.updateReturnPricePreview());
+        }
+
+        // Return Form Submit
+        const returnForm = document.getElementById('returnForm');
+        if (returnForm) {
+          returnForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleReturnSubmit();
+          });
+        }
+
+        // Strategy algorithm switcher in Analytics tab
+        const strategyRadios = document.querySelectorAll('input[name="systemStrategy"]');
+        strategyRadios.forEach(radio => {
+          radio.addEventListener('change', (e) => {
+            this.setPricingStrategy(e.target.value);
+            this.renderFleet();
+            this.showToast(`Active algorithm switched to ${e.target.value.toUpperCase()} strategy.`, 'info');
+          });
+        });
+
+        // JSON Export Button
+        const exportBtn = document.getElementById('exportJsonBtn');
+        if (exportBtn) {
+          exportBtn.addEventListener('click', () => this.exportJSON());
+        }
+
+        // JSON Import
+        const importInput = document.getElementById('importJsonInput');
+        if (importInput) {
+          importInput.addEventListener('change', (e) => this.importJSON(e));
+        }
+
+        // Reset Data Button
+        const resetDataBtn = document.getElementById('resetDataBtn');
+        if (resetDataBtn) {
+          resetDataBtn.addEventListener('click', () => {
+            if (confirm('Restore default vehicles, customers, and sample rentals? All custom edits will be reset.')) {
+              this.resetToDefaults(true);
+            }
+          });
+        }
+
+        // Print Receipt
+        const printInvoiceBtn = document.getElementById('printInvoiceBtn');
+        if (printInvoiceBtn) {
+          printInvoiceBtn.addEventListener('click', () => window.print());
+        }
+      }
 
   setupModalDismissal(dialogId, closeBtnId, cancelBtnId) {
-    const dialog = document.getElementById(dialogId);
-    if (!dialog) return;
+        const dialog = document.getElementById(dialogId);
+        if(!dialog) return;
 
-    if (closeBtnId) {
-      const btn = document.getElementById(closeBtnId);
-      if (btn) btn.addEventListener('click', () => dialog.close());
-    }
-    if (cancelBtnId) {
-      const btn = document.getElementById(cancelBtnId);
-      if (btn) btn.addEventListener('click', () => dialog.close());
-    }
+        if(closeBtnId) {
+          const btn = document.getElementById(closeBtnId);
+          if (btn) btn.addEventListener('click', () => dialog.close());
+        }
+    if(cancelBtnId) {
+          const btn = document.getElementById(cancelBtnId);
+          if (btn) btn.addEventListener('click', () => dialog.close());
+        }
 
     // Close on backdrop click
     dialog.addEventListener('click', (e) => {
-      if (e.target === dialog) dialog.close();
-    });
-  }
+          if (e.target === dialog) dialog.close();
+        });
+      }
 
   switchTab(tabId) {
-    this.currentTab = tabId;
-    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.mobile-nav-link').forEach(t => t.classList.remove('active'));
+        this.currentTab = tabId;
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.mobile-nav-link').forEach(t => t.classList.remove('active'));
 
-    const activePane = document.getElementById(`tab${tabId.charAt(0).toUpperCase() + tabId.slice(1)}`);
-    if (activePane) activePane.classList.add('active');
+        const activePane = document.getElementById(`tab${tabId.charAt(0).toUpperCase() + tabId.slice(1)}`);
+        if(activePane) activePane.classList.add('active');
 
-    const matchingNavTabs = document.querySelectorAll(`[data-tab="${tabId}"]`);
-    matchingNavTabs.forEach(t => t.classList.add('active'));
+        const matchingNavTabs = document.querySelectorAll(`[data-tab="${tabId}"]`);
+        matchingNavTabs.forEach(t => t.classList.add('active'));
 
-    if (tabId === 'fleet') this.renderFleet();
-    if (tabId === 'rentals') this.renderRentals();
-    if (tabId === 'customers') this.renderCustomers();
-    if (tabId === 'analytics') this.renderAnalytics();
-  }
+        if(tabId === 'fleet') this.renderFleet();
+      if (tabId === 'rentals') this.renderRentals();
+      if (tabId === 'customers') this.renderCustomers();
+      if (tabId === 'analytics') this.renderAnalytics();
+    }
 
-  // ============================================================================
-  // 6. RENDERING LOGIC
-  // ============================================================================
+    // ============================================================================
+    // 6. RENDERING LOGIC
+    // ============================================================================
 
-  render() {
-    this.renderStatsBar();
-    this.renderFleet();
-    this.renderRentals();
-    this.renderCustomers();
-    this.renderAnalytics();
-    this.updateStrategyUI();
-  }
+    render() {
+      this.renderStatsBar();
+      this.renderFleet();
+      this.renderRentals();
+      this.renderCustomers();
+      this.renderAnalytics();
+      this.updateStrategyUI();
+    }
 
-  renderStatsBar() {
-    const totalFleet = this.vehicles.length;
-    const available = this.vehicles.filter(v => v.isAvailable).length;
-    const active = this.rentals.filter(r => r.is_active).length;
+    renderStatsBar() {
+      const totalFleet = this.vehicles.length;
+      const available = this.vehicles.filter(v => v.isAvailable).length;
+      const active = this.rentals.filter(r => r.is_active).length;
 
-    // Total revenue from all finished and active rentals
-    const revenue = this.rentals.reduce((sum, r) => sum + (r.total_price || r.price || 0), 0);
+      // Total revenue from all finished and active rentals
+      const revenue = this.rentals.reduce((sum, r) => sum + (r.total_price || r.price || 0), 0);
 
-    const elTotal = document.getElementById('statTotalVehicles');
-    const elAvail = document.getElementById('statAvailableVehicles');
-    const elActive = document.getElementById('statActiveRentals');
-    const elRev = document.getElementById('statTotalRevenue');
-    const badgeActive = document.getElementById('activeRentalsBadge');
-    const badgeMobile = document.getElementById('mobileRentalsBadge');
+      const elTotal = document.getElementById('statTotalVehicles');
+      const elAvail = document.getElementById('statAvailableVehicles');
+      const elActive = document.getElementById('statActiveRentals');
+      const elRev = document.getElementById('statTotalRevenue');
+      const badgeActive = document.getElementById('activeRentalsBadge');
+      const badgeMobile = document.getElementById('mobileRentalsBadge');
 
-    if (elTotal) elTotal.textContent = totalFleet;
-    if (elAvail) elAvail.textContent = available;
-    if (elActive) elActive.textContent = active;
-    if (elRev) elRev.textContent = `$${Math.round(revenue).toLocaleString()}`;
-    if (badgeActive) badgeActive.textContent = active;
-    if (badgeMobile) badgeMobile.textContent = active;
-  }
+      if (elTotal) elTotal.textContent = totalFleet;
+      if (elAvail) elAvail.textContent = available;
+      if (elActive) elActive.textContent = active;
+      if (elRev) elRev.textContent = `$${Math.round(revenue).toLocaleString()}`;
+      if (badgeActive) badgeActive.textContent = active;
+      if (badgeMobile) badgeMobile.textContent = active;
+    }
 
-  renderFleet() {
-    const grid = document.getElementById('vehiclesGrid');
-    const emptyState = document.getElementById('emptyFleetState');
-    const counterBadge = document.getElementById('catalogResultsCount');
-    if (!grid) return;
+    renderFleet() {
+      const grid = document.getElementById('vehiclesGrid');
+      const emptyState = document.getElementById('emptyFleetState');
+      const counterBadge = document.getElementById('catalogResultsCount');
+      if (!grid) return;
 
-    // Filter logic
-    let filtered = this.vehicles.filter(v => {
-      // Type
-      if (this.typeFilter !== 'all' && v.vehicleType() !== this.typeFilter) return false;
-      // Availability
-      if (this.availabilityFilter === 'available' && !v.isAvailable) return false;
-      if (this.availabilityFilter === 'rented' && v.isAvailable) return false;
-      // Price
-      if (v.getRate() > this.maxPrice) return false;
-      // Search
-      if (this.searchQuery) {
-        const query = this.searchQuery;
-        const matchesName = `${v.make} ${v.model} ${v.year}`.toLowerCase().includes(query);
-        const matchesType = v.vehicleType().toLowerCase().includes(query);
-        const matchesFeatures = v.features && v.features.some(f => f.toLowerCase().includes(query));
-        if (!matchesName && !matchesType && !matchesFeatures) return false;
+      // Filter logic
+      let filtered = this.vehicles.filter(v => {
+        // Type
+        if (this.typeFilter !== 'all' && v.vehicleType() !== this.typeFilter) return false;
+        // Availability
+        if (this.availabilityFilter === 'available' && !v.isAvailable) return false;
+        if (this.availabilityFilter === 'rented' && v.isAvailable) return false;
+        // Price
+        if (v.getRate() > this.maxPrice) return false;
+        // Search
+        if (this.searchQuery) {
+          const query = this.searchQuery;
+          const matchesName = `${v.make} ${v.model} ${v.year}`.toLowerCase().includes(query);
+          const matchesType = v.vehicleType().toLowerCase().includes(query);
+          const matchesFeatures = v.features && v.features.some(f => f.toLowerCase().includes(query));
+          if (!matchesName && !matchesType && !matchesFeatures) return false;
+        }
+        return true;
+      });
+
+      // Sorting logic
+      filtered.sort((a, b) => {
+        if (this.sortBy === 'price-asc') return a.getRate() - b.getRate();
+        if (this.sortBy === 'price-desc') return b.getRate() - a.getRate();
+        if (this.sortBy === 'year-desc') return b.year - a.year;
+        if (this.sortBy === 'make-asc') return a.make.localeCompare(b.make);
+        return 0; // featured/recommended maintains default order
+      });
+
+      if (counterBadge) {
+        counterBadge.textContent = `${filtered.length} vehicle${filtered.length === 1 ? '' : 's'}`;
       }
-      return true;
-    });
 
-    // Sorting logic
-    filtered.sort((a, b) => {
-      if (this.sortBy === 'price-asc') return a.getRate() - b.getRate();
-      if (this.sortBy === 'price-desc') return b.getRate() - a.getRate();
-      if (this.sortBy === 'year-desc') return b.year - a.year;
-      if (this.sortBy === 'make-asc') return a.make.localeCompare(b.make);
-      return 0; // featured/recommended maintains default order
-    });
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        if (emptyState) emptyState.style.display = 'flex';
+        return;
+      }
 
-    if (counterBadge) {
-      counterBadge.textContent = `${filtered.length} vehicle${filtered.length === 1 ? '' : 's'}`;
-    }
+      if (emptyState) emptyState.style.display = 'none';
 
-    if (filtered.length === 0) {
-      grid.innerHTML = '';
-      if (emptyState) emptyState.style.display = 'flex';
-      return;
-    }
+      grid.innerHTML = filtered.map(vehicle => this.generateVehicleCardHTML(vehicle)).join('');
 
-    if (emptyState) emptyState.style.display = 'none';
-
-    grid.innerHTML = filtered.map(vehicle => this.generateVehicleCardHTML(vehicle)).join('');
-
-    // Attach listeners on dynamic card buttons
-    grid.querySelectorAll('.rent-card-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const vid = btn.dataset.vehicleId;
-        this.openRentModal(vid);
+      // Attach listeners on dynamic card buttons
+      grid.querySelectorAll('.rent-card-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const vid = btn.dataset.vehicleId;
+          this.openRentModal(vid);
+        });
       });
-    });
 
-    grid.querySelectorAll('.details-card-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const vid = btn.dataset.vehicleId;
-        this.openDetailsModal(vid);
+      grid.querySelectorAll('.details-card-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const vid = btn.dataset.vehicleId;
+          this.openDetailsModal(vid);
+        });
       });
-    });
-  }
-
-  generateVehicleCardHTML(v) {
-    const type = v.vehicleType();
-    const isAvail = v.isAvailable;
-    const rate = v.getRate();
-    const isSUV = type === 'SUV';
-
-    let tagClass = 'tag-car';
-    let typeIcon = '🚗';
-    if (isSUV) {
-      tagClass = 'tag-suv';
-      typeIcon = '🚙';
-    } else if (type === 'Bike') {
-      tagClass = 'tag-bike';
-      typeIcon = '🏍️';
     }
 
-    return `
+    generateVehicleCardHTML(v) {
+      const type = v.vehicleType();
+      const isAvail = v.isAvailable;
+      const rate = v.getRate();
+      const isSUV = type === 'SUV';
+
+      let tagClass = 'tag-car';
+      let typeIcon = '🚗';
+      if (isSUV) {
+        tagClass = 'tag-suv';
+        typeIcon = '🚙';
+      } else if (type === 'Bike') {
+        tagClass = 'tag-bike';
+        typeIcon = '🏍️';
+      }
+
+      return `
       <div class="glass-card vehicle-card">
         <div class="vehicle-img-wrapper">
           <img src="${v.imageUrl}" alt="${v.make} ${v.model}" class="vehicle-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80'">
@@ -1006,78 +1006,78 @@ class RentalApp {
         </div>
       </div>
     `;
-  }
-
-  renderRentals() {
-    const tbody = document.getElementById('rentalsTableBody');
-    const emptyState = document.getElementById('emptyRentalsState');
-    if (!tbody) return;
-
-    // Filters
-    const query = document.getElementById('rentalSearchInput')?.value.trim().toLowerCase() || '';
-    const activeFilterBtn = document.querySelector('.table-filter-toggles .filter-pill.active');
-    const filterMode = activeFilterBtn ? activeFilterBtn.dataset.rentalFilter : 'all';
-
-    let list = this.rentals.filter(r => {
-      if (filterMode === 'active' && !r.is_active) return false;
-      if (filterMode === 'closed' && r.is_active) return false;
-
-      if (query) {
-        const cust = this.customers.find(c => c.id === r.customer_id);
-        const veh = this.vehicles.find(v => v.id === r.vehicle_id);
-        const custName = cust ? cust.name.toLowerCase() : '';
-        const vehName = veh ? `${veh.make} ${veh.model}`.toLowerCase() : '';
-        const ref = r.id.toLowerCase();
-        if (!custName.includes(query) && !vehName.includes(query) && !ref.includes(query)) {
-          return false;
-        }
-      }
-      return true;
-    });
-
-    // Update Rental Tab Metric Cards
-    const activeCount = this.rentals.filter(r => r.is_active).length;
-    const completedCount = this.rentals.filter(r => !r.is_active).length;
-    const totalRevenue = this.rentals.reduce((sum, r) => sum + (r.total_price || r.price || 0), 0);
-    const latePenalties = this.rentals.reduce((sum, r) => sum + (r.late_fee || 0), 0);
-
-    const mActive = document.getElementById('metricActiveRentalsCount');
-    const mComp = document.getElementById('metricCompletedRentalsCount');
-    const mRev = document.getElementById('metricTotalBilledRevenue');
-    const mLate = document.getElementById('metricLateFeesCount');
-
-    if (mActive) mActive.textContent = activeCount;
-    if (mComp) mComp.textContent = completedCount;
-    if (mRev) mRev.textContent = `$${Math.round(totalRevenue).toLocaleString()}`;
-    if (mLate) mLate.textContent = `$${Math.round(latePenalties).toLocaleString()}`;
-
-    if (list.length === 0) {
-      tbody.innerHTML = '';
-      if (emptyState) emptyState.style.display = 'block';
-      return;
     }
 
-    if (emptyState) emptyState.style.display = 'none';
+    renderRentals() {
+      const tbody = document.getElementById('rentalsTableBody');
+      const emptyState = document.getElementById('emptyRentalsState');
+      if (!tbody) return;
 
-    tbody.innerHTML = list.map(r => {
-      const veh = this.vehicles.find(v => v.id === r.vehicle_id);
-      const cust = this.customers.find(c => c.id === r.customer_id);
+      // Filters
+      const query = document.getElementById('rentalSearchInput')?.value.trim().toLowerCase() || '';
+      const activeFilterBtn = document.querySelector('.table-filter-toggles .filter-pill.active');
+      const filterMode = activeFilterBtn ? activeFilterBtn.dataset.rentalFilter : 'all';
 
-      const vehName = veh ? `${veh.make} ${veh.model} (${veh.year})` : 'Vehicle Archived';
-      const custName = cust ? cust.name : 'Unknown Customer';
-      const rateStr = veh ? `$${veh.getRate().toFixed(0)}/day` : 'N/A';
-      const finalPrice = r.total_price !== undefined ? `$${r.total_price.toFixed(2)}` : `$${r.price.toFixed(2)} (Est.)`;
+      let list = this.rentals.filter(r => {
+        if (filterMode === 'active' && !r.is_active) return false;
+        if (filterMode === 'closed' && r.is_active) return false;
 
-      let statusBadge = '';
-      if (r.is_active) {
-        statusBadge = `<span class="status-badge badge-active"><span class="pulse-dot"></span> Active Lease</span>`;
-      } else if (r.late_days > 0) {
-        statusBadge = `<span class="status-badge badge-late">Returned (+${r.late_days}d late)</span>`;
-      } else {
-        statusBadge = `<span class="status-badge badge-closed">Returned On Time</span>`;
+        if (query) {
+          const cust = this.customers.find(c => c.id === r.customer_id);
+          const veh = this.vehicles.find(v => v.id === r.vehicle_id);
+          const custName = cust ? cust.name.toLowerCase() : '';
+          const vehName = veh ? `${veh.make} ${veh.model}`.toLowerCase() : '';
+          const ref = r.id.toLowerCase();
+          if (!custName.includes(query) && !vehName.includes(query) && !ref.includes(query)) {
+            return false;
+          }
+        }
+        return true;
+      });
+
+      // Update Rental Tab Metric Cards
+      const activeCount = this.rentals.filter(r => r.is_active).length;
+      const completedCount = this.rentals.filter(r => !r.is_active).length;
+      const totalRevenue = this.rentals.reduce((sum, r) => sum + (r.total_price || r.price || 0), 0);
+      const latePenalties = this.rentals.reduce((sum, r) => sum + (r.late_fee || 0), 0);
+
+      const mActive = document.getElementById('metricActiveRentalsCount');
+      const mComp = document.getElementById('metricCompletedRentalsCount');
+      const mRev = document.getElementById('metricTotalBilledRevenue');
+      const mLate = document.getElementById('metricLateFeesCount');
+
+      if (mActive) mActive.textContent = activeCount;
+      if (mComp) mComp.textContent = completedCount;
+      if (mRev) mRev.textContent = `$${Math.round(totalRevenue).toLocaleString()}`;
+      if (mLate) mLate.textContent = `$${Math.round(latePenalties).toLocaleString()}`;
+
+      if (list.length === 0) {
+        tbody.innerHTML = '';
+        if (emptyState) emptyState.style.display = 'block';
+        return;
       }
 
-      return `
+      if (emptyState) emptyState.style.display = 'none';
+
+      tbody.innerHTML = list.map(r => {
+        const veh = this.vehicles.find(v => v.id === r.vehicle_id);
+        const cust = this.customers.find(c => c.id === r.customer_id);
+
+        const vehName = veh ? `${veh.make} ${veh.model} (${veh.year})` : 'Vehicle Archived';
+        const custName = cust ? cust.name : 'Unknown Customer';
+        const rateStr = veh ? `$${veh.getRate().toFixed(0)}/day` : 'N/A';
+        const finalPrice = r.total_price !== undefined ? `$${r.total_price.toFixed(2)}` : `$${r.price.toFixed(2)} (Est.)`;
+
+        let statusBadge = '';
+        if (r.is_active) {
+          statusBadge = `<span class="status-badge badge-active"><span class="pulse-dot"></span> Active Lease</span>`;
+        } else if (r.late_days > 0) {
+          statusBadge = `<span class="status-badge badge-late">Returned (+${r.late_days}d late)</span>`;
+        } else {
+          statusBadge = `<span class="status-badge badge-closed">Returned On Time</span>`;
+        }
+
+        return `
         <tr>
           <td><code style="color:var(--accent-cyan); font-weight:700;">${r.id}</code></td>
           <td>
@@ -1106,32 +1106,32 @@ class RentalApp {
           </td>
         </tr>
       `;
-    }).join('');
+      }).join('');
 
-    // Table buttons
-    tbody.querySelectorAll('.return-action-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        this.openReturnModal(btn.dataset.rentalId);
+      // Table buttons
+      tbody.querySelectorAll('.return-action-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          this.openReturnModal(btn.dataset.rentalId);
+        });
       });
-    });
 
-    tbody.querySelectorAll('.view-invoice-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        this.openInvoiceModal(btn.dataset.rentalId);
+      tbody.querySelectorAll('.view-invoice-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          this.openInvoiceModal(btn.dataset.rentalId);
+        });
       });
-    });
-  }
+    }
 
-  renderCustomers() {
-    const grid = document.getElementById('customersGrid');
-    if (!grid) return;
+    renderCustomers() {
+      const grid = document.getElementById('customersGrid');
+      if (!grid) return;
 
-    grid.innerHTML = this.customers.map(cust => {
-      const initials = cust.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-      const customerRentals = this.rentals.filter(r => r.customer_id === cust.id);
-      const activeRentals = customerRentals.filter(r => r.is_active);
+      grid.innerHTML = this.customers.map(cust => {
+        const initials = cust.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        const customerRentals = this.rentals.filter(r => r.customer_id === cust.id);
+        const activeRentals = customerRentals.filter(r => r.is_active);
 
-      return `
+        return `
         <div class="glass-card customer-card">
           <div class="customer-top">
             <div class="customer-avatar">${initials}</div>
@@ -1159,77 +1159,77 @@ class RentalApp {
           </div>
         </div>
       `;
-    }).join('');
-  }
+      }).join('');
+    }
 
-  renderAnalytics() {
-    const totalVehicles = this.vehicles.length;
-    const rentedVehicles = this.vehicles.filter(v => !v.isAvailable).length;
-    const ratePercent = totalVehicles ? Math.round((rentedVehicles / totalVehicles) * 100) : 0;
+    renderAnalytics() {
+      const totalVehicles = this.vehicles.length;
+      const rentedVehicles = this.vehicles.filter(v => !v.isAvailable).length;
+      const ratePercent = totalVehicles ? Math.round((rentedVehicles / totalVehicles) * 100) : 0;
 
-    const percentText = document.getElementById('utilizationPercentText');
-    const progressBar = document.getElementById('utilizationProgressBar');
-    if (percentText) percentText.textContent = `${ratePercent}%`;
-    if (progressBar) progressBar.style.width = `${ratePercent}%`;
+      const percentText = document.getElementById('utilizationPercentText');
+      const progressBar = document.getElementById('utilizationProgressBar');
+      if (percentText) percentText.textContent = `${ratePercent}%`;
+      if (progressBar) progressBar.style.width = `${ratePercent}%`;
 
-    // Category breakdown
-    const catList = document.getElementById('categoryBreakdownList');
-    if (catList) {
-      const counts = { Car: 0, SUV: 0, Bike: 0 };
-      this.vehicles.forEach(v => {
-        const t = v.vehicleType();
-        if (counts[t] !== undefined) counts[t]++;
-        else counts[t] = 1;
-      });
+      // Category breakdown
+      const catList = document.getElementById('categoryBreakdownList');
+      if (catList) {
+        const counts = { Car: 0, SUV: 0, Bike: 0 };
+        this.vehicles.forEach(v => {
+          const t = v.vehicleType();
+          if (counts[t] !== undefined) counts[t]++;
+          else counts[t] = 1;
+        });
 
-      catList.innerHTML = Object.entries(counts).map(([type, count]) => {
-        const share = totalVehicles ? Math.round((count / totalVehicles) * 100) : 0;
-        return `
+        catList.innerHTML = Object.entries(counts).map(([type, count]) => {
+          const share = totalVehicles ? Math.round((count / totalVehicles) * 100) : 0;
+          return `
           <div class="cat-item-row">
             <span>${type}s</span>
             <span><strong>${count}</strong> units (${share}%)</span>
           </div>
         `;
-      }).join('');
-    }
-  }
-
-  updateStrategyUI() {
-    const badgeText = document.getElementById('strategyBadgeText');
-    const tieredRadio = document.getElementById('strategyRadioTiered');
-    const flatRadio = document.getElementById('strategyRadioFlat');
-
-    if (this.currentStrategyType === 'tiered') {
-      if (badgeText) badgeText.textContent = 'Tiered Strategy (10% off 7+ days)';
-      if (tieredRadio) tieredRadio.checked = true;
-    } else {
-      if (badgeText) badgeText.textContent = 'Flat Rate Strategy (Standard)';
-      if (flatRadio) flatRadio.checked = true;
-    }
-  }
-
-  // ============================================================================
-  // 7. MODAL ACTIONS & INTERACTIVE WIZARDS
-  // ============================================================================
-
-  openRentModal(vehicleId) {
-    const vehicle = this.vehicles.find(v => v.id === vehicleId);
-    if (!vehicle || !vehicle.isAvailable) {
-      this.showToast('Vehicle is not available for rental.', 'error');
-      return;
+        }).join('');
+      }
     }
 
-    const modal = document.getElementById('rentModal');
-    const title = document.getElementById('rentModalVehicleTitle');
-    const preview = document.getElementById('rentVehiclePreview');
-    const customerSelect = document.getElementById('rentCustomerSelect');
-    const startDateInput = document.getElementById('rentStartDate');
-    const daysInput = document.getElementById('rentDaysInput');
+    updateStrategyUI() {
+      const badgeText = document.getElementById('strategyBadgeText');
+      const tieredRadio = document.getElementById('strategyRadioTiered');
+      const flatRadio = document.getElementById('strategyRadioFlat');
 
-    title.textContent = `Rent ${vehicle.make} ${vehicle.model}`;
+      if (this.currentStrategyType === 'tiered') {
+        if (badgeText) badgeText.textContent = 'Tiered Strategy (10% off 7+ days)';
+        if (tieredRadio) tieredRadio.checked = true;
+      } else {
+        if (badgeText) badgeText.textContent = 'Flat Rate Strategy (Standard)';
+        if (flatRadio) flatRadio.checked = true;
+      }
+    }
 
-    // Populate Vehicle preview
-    preview.innerHTML = `
+    // ============================================================================
+    // 7. MODAL ACTIONS & INTERACTIVE WIZARDS
+    // ============================================================================
+
+    openRentModal(vehicleId) {
+      const vehicle = this.vehicles.find(v => v.id === vehicleId);
+      if (!vehicle || !vehicle.isAvailable) {
+        this.showToast('Vehicle is not available for rental.', 'error');
+        return;
+      }
+
+      const modal = document.getElementById('rentModal');
+      const title = document.getElementById('rentModalVehicleTitle');
+      const preview = document.getElementById('rentVehiclePreview');
+      const customerSelect = document.getElementById('rentCustomerSelect');
+      const startDateInput = document.getElementById('rentStartDate');
+      const daysInput = document.getElementById('rentDaysInput');
+
+      title.textContent = `Rent ${vehicle.make} ${vehicle.model}`;
+
+      // Populate Vehicle preview
+      preview.innerHTML = `
       <img src="${vehicle.imageUrl}" class="preview-thumbnail" alt="${vehicle.make} ${vehicle.model}">
       <div class="preview-details">
         <span class="preview-title">${vehicle.make} ${vehicle.model} (${vehicle.year})</span>
@@ -1237,121 +1237,121 @@ class RentalApp {
       </div>
     `;
 
-    // Populate customer dropdown
-    customerSelect.innerHTML = `<option value="">-- Choose a registered driver --</option>` +
-      this.customers.map(c => `
+      // Populate customer dropdown
+      customerSelect.innerHTML = `<option value="">-- Choose a registered driver --</option>` +
+        this.customers.map(c => `
         <option value="${c.id}">${c.name} &bull; ${c.licenseNumber}</option>
       `).join('');
 
-    // Pre-fill today's date
-    const today = new Date().toISOString().split('T')[0];
-    startDateInput.value = today;
-    daysInput.value = 3;
+      // Pre-fill today's date
+      const today = new Date().toISOString().split('T')[0];
+      startDateInput.value = today;
+      daysInput.value = 3;
 
-    // Store selected vehicle ID on form
-    modal.dataset.vehicleId = vehicleId;
+      // Store selected vehicle ID on form
+      modal.dataset.vehicleId = vehicleId;
 
-    this.updateRentPricePreview();
-    modal.showModal();
-  }
-
-  updateRentPricePreview() {
-    const modal = document.getElementById('rentModal');
-    const vehicleId = modal.dataset.vehicleId;
-    const vehicle = this.vehicles.find(v => v.id === vehicleId);
-    if (!vehicle) return;
-
-    const daysInput = document.getElementById('rentDaysInput');
-    const days = Math.max(1, parseInt(daysInput.value, 10) || 1);
-
-    const baseDaily = vehicle.baseRatePerDay;
-    const effectiveDaily = vehicle.getRate();
-    const isSUV = vehicle.vehicleType() === 'SUV';
-
-    const surchargeRow = document.getElementById('breakdownSurchargeRow');
-    const surchargeEl = document.getElementById('breakdownSurcharge');
-    const discountRow = document.getElementById('breakdownDiscountRow');
-    const discountEl = document.getElementById('breakdownDiscount');
-    const totalEl = document.getElementById('breakdownTotal');
-    const daysEl = document.getElementById('breakdownDays');
-    const rateEl = document.getElementById('breakdownDailyRate');
-    const strategyBadge = document.getElementById('breakdownStrategyBadge');
-
-    rateEl.textContent = `$${baseDaily.toFixed(2)}/day`;
-    daysEl.textContent = `${days} day${days > 1 ? 's' : ''}`;
-
-    if (isSUV) {
-      surchargeRow.style.display = 'flex';
-      surchargeEl.textContent = `+$${(baseDaily * 0.15).toFixed(2)}/day`;
-    } else {
-      surchargeRow.style.display = 'none';
+      this.updateRentPricePreview();
+      modal.showModal();
     }
 
-    const calculatedPrice = this.pricingStrategy.calculatePrice(vehicle, days);
-    const standardTotal = effectiveDaily * days;
+    updateRentPricePreview() {
+      const modal = document.getElementById('rentModal');
+      const vehicleId = modal.dataset.vehicleId;
+      const vehicle = this.vehicles.find(v => v.id === vehicleId);
+      if (!vehicle) return;
 
-    if (this.currentStrategyType === 'tiered' && days >= 7) {
-      discountRow.style.display = 'flex';
-      const savings = standardTotal - calculatedPrice;
-      discountEl.textContent = `-$${savings.toFixed(2)}`;
-      strategyBadge.textContent = 'Tiered 10% Weekly Discount';
-    } else {
-      discountRow.style.display = 'none';
-      strategyBadge.textContent = this.currentStrategyType === 'tiered' ? 'Tiered Strategy' : 'Flat Strategy';
-    }
+      const daysInput = document.getElementById('rentDaysInput');
+      const days = Math.max(1, parseInt(daysInput.value, 10) || 1);
 
-    totalEl.textContent = `$${calculatedPrice.toFixed(2)}`;
-  }
+      const baseDaily = vehicle.baseRatePerDay;
+      const effectiveDaily = vehicle.getRate();
+      const isSUV = vehicle.vehicleType() === 'SUV';
 
-  validateRentDriverStatus() {
-    const customerSelect = document.getElementById('rentCustomerSelect');
-    const hint = document.getElementById('rentCustomerHint');
-    const customer = this.customers.find(c => c.id === customerSelect.value);
+      const surchargeRow = document.getElementById('breakdownSurchargeRow');
+      const surchargeEl = document.getElementById('breakdownSurcharge');
+      const discountRow = document.getElementById('breakdownDiscountRow');
+      const discountEl = document.getElementById('breakdownDiscount');
+      const totalEl = document.getElementById('breakdownTotal');
+      const daysEl = document.getElementById('breakdownDays');
+      const rateEl = document.getElementById('breakdownDailyRate');
+      const strategyBadge = document.getElementById('breakdownStrategyBadge');
 
-    if (customer) {
-      if (customer.canRent()) {
-        hint.textContent = `License Verified: ${customer.licenseNumber} (Approved)`;
-        hint.style.color = 'var(--accent-emerald)';
+      rateEl.textContent = `$${baseDaily.toFixed(2)}/day`;
+      daysEl.textContent = `${days} day${days > 1 ? 's' : ''}`;
+
+      if (isSUV) {
+        surchargeRow.style.display = 'flex';
+        surchargeEl.textContent = `+$${(baseDaily * 0.15).toFixed(2)}/day`;
       } else {
-        hint.textContent = `License missing or invalid! Cannot rent.`;
-        hint.style.color = 'var(--accent-rose)';
+        surchargeRow.style.display = 'none';
       }
-    } else {
-      hint.textContent = `Driver must possess a valid, non-empty driving license.`;
-      hint.style.color = 'var(--text-dim)';
+
+      const calculatedPrice = this.pricingStrategy.calculatePrice(vehicle, days);
+      const standardTotal = effectiveDaily * days;
+
+      if (this.currentStrategyType === 'tiered' && days >= 7) {
+        discountRow.style.display = 'flex';
+        const savings = standardTotal - calculatedPrice;
+        discountEl.textContent = `-$${savings.toFixed(2)}`;
+        strategyBadge.textContent = 'Tiered 10% Weekly Discount';
+      } else {
+        discountRow.style.display = 'none';
+        strategyBadge.textContent = this.currentStrategyType === 'tiered' ? 'Tiered Strategy' : 'Flat Strategy';
+      }
+
+      totalEl.textContent = `$${calculatedPrice.toFixed(2)}`;
     }
-  }
 
-  handleRentSubmit() {
-    const modal = document.getElementById('rentModal');
-    const vehicleId = modal.dataset.vehicleId;
-    const customerId = document.getElementById('rentCustomerSelect').value;
-    const startDate = document.getElementById('rentStartDate').value;
-    const days = parseInt(document.getElementById('rentDaysInput').value, 10);
+    validateRentDriverStatus() {
+      const customerSelect = document.getElementById('rentCustomerSelect');
+      const hint = document.getElementById('rentCustomerHint');
+      const customer = this.customers.find(c => c.id === customerSelect.value);
 
-    try {
-      const rental = this.rentVehicle(customerId, vehicleId, startDate, days);
-      modal.close();
-      this.render();
-      this.showToast(`Vehicle rented successfully! Booking Ref: ${rental.id}`, 'success');
-      this.openInvoiceModal(rental.id);
-    } catch (err) {
-      this.showToast(err.message, 'error');
+      if (customer) {
+        if (customer.canRent()) {
+          hint.textContent = `License Verified: ${customer.licenseNumber} (Approved)`;
+          hint.style.color = 'var(--accent-emerald)';
+        } else {
+          hint.textContent = `License missing or invalid! Cannot rent.`;
+          hint.style.color = 'var(--accent-rose)';
+        }
+      } else {
+        hint.textContent = `Driver must possess a valid, non-empty driving license.`;
+        hint.style.color = 'var(--text-dim)';
+      }
     }
-  }
 
-  openReturnModal(rentalId) {
-    const rental = this.rentals.find(r => r.id === rentalId);
-    if (!rental) return;
+    handleRentSubmit() {
+      const modal = document.getElementById('rentModal');
+      const vehicleId = modal.dataset.vehicleId;
+      const customerId = document.getElementById('rentCustomerSelect').value;
+      const startDate = document.getElementById('rentStartDate').value;
+      const days = parseInt(document.getElementById('rentDaysInput').value, 10);
 
-    const vehicle = this.vehicles.find(v => v.id === rental.vehicle_id);
-    const customer = this.customers.find(c => c.id === rental.customer_id);
+      try {
+        const rental = this.rentVehicle(customerId, vehicleId, startDate, days);
+        modal.close();
+        this.render();
+        this.showToast(`Vehicle rented successfully! Booking Ref: ${rental.id}`, 'success');
+        this.openInvoiceModal(rental.id);
+      } catch (err) {
+        this.showToast(err.message, 'error');
+      }
+    }
 
-    const modal = document.getElementById('returnModal');
-    document.getElementById('returnRentalId').value = rentalId;
+    openReturnModal(rentalId) {
+      const rental = this.rentals.find(r => r.id === rentalId);
+      if (!rental) return;
 
-    const summary = document.getElementById('returnSummaryCard');
-    summary.innerHTML = `
+      const vehicle = this.vehicles.find(v => v.id === rental.vehicle_id);
+      const customer = this.customers.find(c => c.id === rental.customer_id);
+
+      const modal = document.getElementById('returnModal');
+      document.getElementById('returnRentalId').value = rentalId;
+
+      const summary = document.getElementById('returnSummaryCard');
+      summary.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
         <span style="font-size:0.8rem; color:var(--accent-cyan); font-weight:700;">AGREEMENT ${rental.id}</span>
         <span class="status-badge badge-active">Active</span>
@@ -1364,155 +1364,155 @@ class RentalApp {
       </div>
     `;
 
-    // Suggest return date based on planned days or today
-    const start = new Date(rental.start_date);
-    const plannedReturn = new Date(start.getTime() + rental.planned_days * 86400000);
-    const today = new Date();
-    // Default to planned return or today if later
-    const defaultDate = (today > plannedReturn ? today : plannedReturn).toISOString().split('T')[0];
+      // Suggest return date based on planned days or today
+      const start = new Date(rental.start_date);
+      const plannedReturn = new Date(start.getTime() + rental.planned_days * 86400000);
+      const today = new Date();
+      // Default to planned return or today if later
+      const defaultDate = (today > plannedReturn ? today : plannedReturn).toISOString().split('T')[0];
 
-    const actualDateInput = document.getElementById('returnActualDate');
-    actualDateInput.value = defaultDate;
+      const actualDateInput = document.getElementById('returnActualDate');
+      actualDateInput.value = defaultDate;
 
-    this.updateReturnPricePreview();
-    modal.showModal();
-  }
-
-  updateReturnPricePreview() {
-    const rentalId = document.getElementById('returnRentalId').value;
-    const rental = this.rentals.find(r => r.id === rentalId);
-    if (!rental) return;
-
-    const vehicle = this.vehicles.find(v => v.id === rental.vehicle_id);
-    if (!vehicle) return;
-
-    const actualDateStr = document.getElementById('returnActualDate').value;
-    if (!actualDateStr) return;
-
-    const start = new Date(rental.start_date);
-    const actualReturn = new Date(actualDateStr);
-    const diffDays = Math.ceil((actualReturn - start) / (1000 * 60 * 60 * 24)) || 1;
-
-    const plannedDays = rental.planned_days;
-    const lateDays = Math.max(0, diffDays - plannedDays);
-    const effectiveDays = Math.min(diffDays, plannedDays);
-
-    const baseCost = this.pricingStrategy.calculatePrice(vehicle, effectiveDays);
-    const lateFee = +(0.2 * vehicle.getRate() * lateDays).toFixed(2);
-    const totalDue = +(baseCost + lateFee).toFixed(2);
-
-    document.getElementById('returnPlannedDays').textContent = `${plannedDays} days`;
-    document.getElementById('returnActualDays').textContent = `${diffDays} days`;
-    document.getElementById('returnBaseCost').textContent = `$${baseCost.toFixed(2)}`;
-
-    const lateRow = document.getElementById('returnLateRow');
-    const lateFeeEl = document.getElementById('returnLateFee');
-    const statusBadge = document.getElementById('returnStatusBadge');
-
-    if (lateDays > 0) {
-      lateRow.style.display = 'flex';
-      lateFeeEl.textContent = `+$${lateFee.toFixed(2)} (${lateDays} day${lateDays > 1 ? 's' : ''} late)`;
-      statusBadge.textContent = `Overdue (+${lateDays}d)`;
-      statusBadge.className = 'status-badge badge-late';
-    } else {
-      lateRow.style.display = 'none';
-      statusBadge.textContent = 'On Schedule';
-      statusBadge.className = 'status-badge badge-closed';
+      this.updateReturnPricePreview();
+      modal.showModal();
     }
 
-    document.getElementById('returnTotalDue').textContent = `$${totalDue.toFixed(2)}`;
-  }
+    updateReturnPricePreview() {
+      const rentalId = document.getElementById('returnRentalId').value;
+      const rental = this.rentals.find(r => r.id === rentalId);
+      if (!rental) return;
 
-  handleReturnSubmit() {
-    const rentalId = document.getElementById('returnRentalId').value;
-    const returnDate = document.getElementById('returnActualDate').value;
+      const vehicle = this.vehicles.find(v => v.id === rental.vehicle_id);
+      if (!vehicle) return;
 
-    try {
-      const closedRental = this.returnVehicle(rentalId, returnDate);
-      document.getElementById('returnModal').close();
+      const actualDateStr = document.getElementById('returnActualDate').value;
+      if (!actualDateStr) return;
+
+      const start = new Date(rental.start_date);
+      const actualReturn = new Date(actualDateStr);
+      const diffDays = Math.ceil((actualReturn - start) / (1000 * 60 * 60 * 24)) || 1;
+
+      const plannedDays = rental.planned_days;
+      const lateDays = Math.max(0, diffDays - plannedDays);
+      const effectiveDays = Math.min(diffDays, plannedDays);
+
+      const baseCost = this.pricingStrategy.calculatePrice(vehicle, effectiveDays);
+      const lateFee = +(0.2 * vehicle.getRate() * lateDays).toFixed(2);
+      const totalDue = +(baseCost + lateFee).toFixed(2);
+
+      document.getElementById('returnPlannedDays').textContent = `${plannedDays} days`;
+      document.getElementById('returnActualDays').textContent = `${diffDays} days`;
+      document.getElementById('returnBaseCost').textContent = `$${baseCost.toFixed(2)}`;
+
+      const lateRow = document.getElementById('returnLateRow');
+      const lateFeeEl = document.getElementById('returnLateFee');
+      const statusBadge = document.getElementById('returnStatusBadge');
+
+      if (lateDays > 0) {
+        lateRow.style.display = 'flex';
+        lateFeeEl.textContent = `+$${lateFee.toFixed(2)} (${lateDays} day${lateDays > 1 ? 's' : ''} late)`;
+        statusBadge.textContent = `Overdue (+${lateDays}d)`;
+        statusBadge.className = 'status-badge badge-late';
+      } else {
+        lateRow.style.display = 'none';
+        statusBadge.textContent = 'On Schedule';
+        statusBadge.className = 'status-badge badge-closed';
+      }
+
+      document.getElementById('returnTotalDue').textContent = `$${totalDue.toFixed(2)}`;
+    }
+
+    handleReturnSubmit() {
+      const rentalId = document.getElementById('returnRentalId').value;
+      const returnDate = document.getElementById('returnActualDate').value;
+
+      try {
+        const closedRental = this.returnVehicle(rentalId, returnDate);
+        document.getElementById('returnModal').close();
+        this.render();
+        this.showToast(`Vehicle checked in successfully! Settled: $${closedRental.total_price.toFixed(2)}`, 'success');
+        this.openInvoiceModal(rentalId);
+      } catch (err) {
+        this.showToast(err.message, 'error');
+      }
+    }
+
+    openAddVehicleModal() {
+      const modal = document.getElementById('addVehicleModal');
+      document.getElementById('addVehicleForm').reset();
+      document.getElementById('suv4wdGroup').style.display = 'none';
+      document.getElementById('seatsFieldGroup').style.display = 'flex';
+      document.getElementById('newSeats').value = '4';
+      modal.showModal();
+    }
+
+    handleAddVehicleSubmit() {
+      const type = document.querySelector('input[name="newVehicleType"]:checked').value;
+      const make = document.getElementById('newMake').value.trim();
+      const model = document.getElementById('newModel').value.trim();
+      const year = parseInt(document.getElementById('newYear').value, 10);
+      const baseRate = parseFloat(document.getElementById('newBaseRate').value);
+      const imageUrl = document.getElementById('newImageUrl').value.trim();
+
+      let newVeh;
+      if (type === 'SUV') {
+        const seats = parseInt(document.getElementById('newSeats').value, 10) || 7;
+        const fourWheelDrive = document.getElementById('newFourWheelDrive').checked;
+        newVeh = new SUV('', make, model, year, baseRate, true, seats, fourWheelDrive, imageUrl);
+      } else if (type === 'Bike') {
+        newVeh = new Bike('', make, model, year, baseRate, true, '155cc', imageUrl);
+      } else {
+        const seats = parseInt(document.getElementById('newSeats').value, 10) || 4;
+        newVeh = new Car('', make, model, year, baseRate, true, seats, imageUrl);
+      }
+
+      this.vehicles.unshift(newVeh);
+      this.saveState();
+      document.getElementById('addVehicleModal').close();
       this.render();
-      this.showToast(`Vehicle checked in successfully! Settled: $${closedRental.total_price.toFixed(2)}`, 'success');
-      this.openInvoiceModal(rentalId);
-    } catch (err) {
-      this.showToast(err.message, 'error');
-    }
-  }
-
-  openAddVehicleModal() {
-    const modal = document.getElementById('addVehicleModal');
-    document.getElementById('addVehicleForm').reset();
-    document.getElementById('suv4wdGroup').style.display = 'none';
-    document.getElementById('seatsFieldGroup').style.display = 'flex';
-    document.getElementById('newSeats').value = '4';
-    modal.showModal();
-  }
-
-  handleAddVehicleSubmit() {
-    const type = document.querySelector('input[name="newVehicleType"]:checked').value;
-    const make = document.getElementById('newMake').value.trim();
-    const model = document.getElementById('newModel').value.trim();
-    const year = parseInt(document.getElementById('newYear').value, 10);
-    const baseRate = parseFloat(document.getElementById('newBaseRate').value);
-    const imageUrl = document.getElementById('newImageUrl').value.trim();
-
-    let newVeh;
-    if (type === 'SUV') {
-      const seats = parseInt(document.getElementById('newSeats').value, 10) || 7;
-      const fourWheelDrive = document.getElementById('newFourWheelDrive').checked;
-      newVeh = new SUV('', make, model, year, baseRate, true, seats, fourWheelDrive, imageUrl);
-    } else if (type === 'Bike') {
-      newVeh = new Bike('', make, model, year, baseRate, true, '155cc', imageUrl);
-    } else {
-      const seats = parseInt(document.getElementById('newSeats').value, 10) || 4;
-      newVeh = new Car('', make, model, year, baseRate, true, seats, imageUrl);
+      this.showToast(`${newVeh.make} ${newVeh.model} added to fleet!`, 'success');
     }
 
-    this.vehicles.unshift(newVeh);
-    this.saveState();
-    document.getElementById('addVehicleModal').close();
-    this.render();
-    this.showToast(`${newVeh.make} ${newVeh.model} added to fleet!`, 'success');
-  }
-
-  openCustomerModal() {
-    const modal = document.getElementById('customerModal');
-    document.getElementById('customerForm').reset();
-    modal.showModal();
-  }
-
-  handleCustomerSubmit() {
-    const name = document.getElementById('custName').value.trim();
-    const license = document.getElementById('custLicense').value.trim();
-    const email = document.getElementById('custEmail').value.trim();
-    const phone = document.getElementById('custPhone').value.trim();
-
-    if (!license) {
-      this.showToast('Driver license is strictly required.', 'error');
-      return;
+    openCustomerModal() {
+      const modal = document.getElementById('customerModal');
+      document.getElementById('customerForm').reset();
+      modal.showModal();
     }
 
-    const newCust = new Customer('', name, license, email, phone);
-    this.customers.unshift(newCust);
-    this.saveState();
-    document.getElementById('customerModal').close();
-    this.renderCustomers();
-    this.showToast(`Driver account registered for ${newCust.name}!`, 'success');
-  }
+    handleCustomerSubmit() {
+      const name = document.getElementById('custName').value.trim();
+      const license = document.getElementById('custLicense').value.trim();
+      const email = document.getElementById('custEmail').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
 
-  openDetailsModal(vehicleId) {
-    const vehicle = this.vehicles.find(v => v.id === vehicleId);
-    if (!vehicle) return;
+      if (!license) {
+        this.showToast('Driver license is strictly required.', 'error');
+        return;
+      }
 
-    const modal = document.getElementById('detailsModal');
-    const title = document.getElementById('detailsTitle');
-    const body = document.getElementById('detailsBody');
+      const newCust = new Customer('', name, license, email, phone);
+      this.customers.unshift(newCust);
+      this.saveState();
+      document.getElementById('customerModal').close();
+      this.renderCustomers();
+      this.showToast(`Driver account registered for ${newCust.name}!`, 'success');
+    }
 
-    title.textContent = `${vehicle.make} ${vehicle.model}`;
+    openDetailsModal(vehicleId) {
+      const vehicle = this.vehicles.find(v => v.id === vehicleId);
+      if (!vehicle) return;
 
-    const isSUV = vehicle.vehicleType() === 'SUV';
-    const isBike = vehicle.vehicleType() === 'Bike';
+      const modal = document.getElementById('detailsModal');
+      const title = document.getElementById('detailsTitle');
+      const body = document.getElementById('detailsBody');
 
-    body.innerHTML = `
+      title.textContent = `${vehicle.make} ${vehicle.model}`;
+
+      const isSUV = vehicle.vehicleType() === 'SUV';
+      const isBike = vehicle.vehicleType() === 'Bike';
+
+      body.innerHTML = `
       <div class="details-hero">
         <img src="${vehicle.imageUrl}" alt="${vehicle.make} ${vehicle.model}">
       </div>
@@ -1581,23 +1581,23 @@ class RentalApp {
       </div>
     `;
 
-    modal.showModal();
-  }
+      modal.showModal();
+    }
 
-  openInvoiceModal(rentalId) {
-    const rental = this.rentals.find(r => r.id === rentalId);
-    if (!rental) return;
+    openInvoiceModal(rentalId) {
+      const rental = this.rentals.find(r => r.id === rentalId);
+      if (!rental) return;
 
-    const vehicle = this.vehicles.find(v => v.id === rental.vehicle_id);
-    const customer = this.customers.find(c => c.id === rental.customer_id);
+      const vehicle = this.vehicles.find(v => v.id === rental.vehicle_id);
+      const customer = this.customers.find(c => c.id === rental.customer_id);
 
-    const modal = document.getElementById('invoiceModal');
-    const container = document.getElementById('invoiceContent');
+      const modal = document.getElementById('invoiceModal');
+      const container = document.getElementById('invoiceContent');
 
-    const total = rental.total_price !== undefined ? rental.total_price : rental.price;
-    const isClosed = !rental.is_active;
+      const total = rental.total_price !== undefined ? rental.total_price : rental.price;
+      const isClosed = !rental.is_active;
 
-    container.innerHTML = `
+      container.innerHTML = `
       <div class="invoice-card-print">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; border-bottom:1px solid var(--glass-border); padding-bottom:16px;">
           <div>
@@ -1659,107 +1659,107 @@ class RentalApp {
       </div>
     `;
 
-    modal.showModal();
-  }
+      modal.showModal();
+    }
 
-  // ============================================================================
-  // 8. DATA IMPORT & EXPORT (Parity with rental_system.py)
-  // ============================================================================
+    // ============================================================================
+    // 8. DATA IMPORT & EXPORT (Parity with rental_system.py)
+    // ============================================================================
 
-  exportJSON() {
-    const payload = {
-      vehicles: this.vehicles.map(v => ({
-        id: v.id,
-        make: v.make,
-        model: v.model,
-        year: v.year,
-        base_rate_per_day: v.baseRatePerDay,
-        is_available: v.isAvailable,
-        vehicle_type: v.vehicleType(),
-        seats: v.seats,
-        four_wheel_drive: v.fourWheelDrive,
-        engine_cc: v.engineCc,
-        imageUrl: v.imageUrl,
-        features: v.features
-      })),
-      customers: this.customers.map(c => ({
-        id: c.id,
-        name: c.name,
-        license_number: c.licenseNumber,
-        email: c.email,
-        phone: c.phone
-      })),
-      rentals: this.rentals
-    };
+    exportJSON() {
+      const payload = {
+        vehicles: this.vehicles.map(v => ({
+          id: v.id,
+          make: v.make,
+          model: v.model,
+          year: v.year,
+          base_rate_per_day: v.baseRatePerDay,
+          is_available: v.isAvailable,
+          vehicle_type: v.vehicleType(),
+          seats: v.seats,
+          four_wheel_drive: v.fourWheelDrive,
+          engine_cc: v.engineCc,
+          imageUrl: v.imageUrl,
+          features: v.features
+        })),
+        customers: this.customers.map(c => ({
+          id: c.id,
+          name: c.name,
+          license_number: c.licenseNumber,
+          email: c.email,
+          phone: c.phone
+        })),
+        rentals: this.rentals
+      };
 
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
-    const dlAnchor = document.createElement('a');
-    dlAnchor.setAttribute("href", dataStr);
-    dlAnchor.setAttribute("download", `auradrive_fleet_backup_${new Date().toISOString().split('T')[0]}.json`);
-    document.body.appendChild(dlAnchor);
-    dlAnchor.click();
-    dlAnchor.remove();
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
+      const dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute("href", dataStr);
+      dlAnchor.setAttribute("download", `auradrive_fleet_backup_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
 
-    this.showToast('Fleet & rental data exported to JSON!', 'success');
-  }
+      this.showToast('Fleet & rental data exported to JSON!', 'success');
+    }
 
-  importJSON(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+    importJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
-        if (data.vehicles && Array.isArray(data.vehicles)) {
-          this.vehicles = data.vehicles.map(v => this.deserializeVehicle(v));
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (data.vehicles && Array.isArray(data.vehicles)) {
+            this.vehicles = data.vehicles.map(v => this.deserializeVehicle(v));
+          }
+          if (data.customers && Array.isArray(data.customers)) {
+            this.customers = data.customers.map(c => new Customer(c.id, c.name, c.license_number || c.licenseNumber, c.email, c.phone));
+          }
+          if (data.rentals && Array.isArray(data.rentals)) {
+            this.rentals = data.rentals;
+          }
+
+          this.saveState();
+          this.render();
+          this.showToast('JSON data imported successfully!', 'success');
+        } catch (err) {
+          this.showToast('Invalid JSON file format: ' + err.message, 'error');
         }
-        if (data.customers && Array.isArray(data.customers)) {
-          this.customers = data.customers.map(c => new Customer(c.id, c.name, c.license_number || c.licenseNumber, c.email, c.phone));
-        }
-        if (data.rentals && Array.isArray(data.rentals)) {
-          this.rentals = data.rentals;
-        }
+      };
+      reader.readAsText(file);
+    }
 
-        this.saveState();
-        this.render();
-        this.showToast('JSON data imported successfully!', 'success');
-      } catch (err) {
-        this.showToast('Invalid JSON file format: ' + err.message, 'error');
-      }
-    };
-    reader.readAsText(file);
-  }
+    // ============================================================================
+    // 9. TOAST NOTIFICATION ENGINE
+    // ============================================================================
 
-  // ============================================================================
-  // 9. TOAST NOTIFICATION ENGINE
-  // ============================================================================
+    showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
 
-  showToast(message, type = 'info') {
-    const container = document.getElementById('toastContainer');
-    if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
 
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
+      let icon = 'ℹ️';
+      if (type === 'success') icon = '✓';
+      if (type === 'error') icon = '⚠️';
 
-    let icon = 'ℹ️';
-    if (type === 'success') icon = '✓';
-    if (type === 'error') icon = '⚠️';
-
-    toast.innerHTML = `
+      toast.innerHTML = `
       <span style="font-weight:bold; font-size:1.1rem;">${icon}</span>
       <span>${message}</span>
     `;
 
-    container.appendChild(toast);
+      container.appendChild(toast);
 
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transform = 'translateX(40px)';
-      setTimeout(() => toast.remove(), 300);
-    }, 3800);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(40px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3800);
+    }
   }
-}
 
 // Instantiate on DOM load
 window.addEventListener('DOMContentLoaded', () => {
