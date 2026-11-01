@@ -1731,6 +1731,108 @@ class RentalApp {
       reader.readAsText(file);
     }
 
+    // Dedicated Isolated Print Engine (Guarantees Single Page Receipt)
+    printReceipt() {
+      const invoiceContent = document.getElementById('invoiceContent');
+      if (!invoiceContent) return;
+
+      // Use a clean isolated print frame to guarantee exactly one single receipt is generated without browser duplication
+      let printFrame = document.getElementById('receiptPrintFrame');
+      if (!printFrame) {
+        printFrame = document.createElement('iframe');
+        printFrame.id = 'receiptPrintFrame';
+        printFrame.style.position = 'fixed';
+        printFrame.style.right = '0';
+        printFrame.style.bottom = '0';
+        printFrame.style.width = '0';
+        printFrame.style.height = '0';
+        printFrame.style.border = '0';
+        document.body.appendChild(printFrame);
+      }
+
+      const frameDoc = printFrame.contentWindow.document;
+      frameDoc.open();
+      frameDoc.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>AuraDrive Rental Receipt</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+          <style>
+            @page { size: portrait; margin: 12mm; }
+            * { box-sizing: border-box; margin: 0; padding: 0; }
+            body {
+              font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+              background: #ffffff;
+              color: #0f172a;
+              padding: 10px;
+              display: flex;
+              justify-content: center;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+            .invoice-card-print {
+              width: 100%;
+              max-width: 620px;
+              background: #ffffff !important;
+              color: #0f172a !important;
+              border: 1px solid #cbd5e1 !important;
+              border-radius: 10px;
+              padding: 24px;
+              box-shadow: none !important;
+              page-break-inside: avoid;
+              break-inside: avoid;
+            }
+            .invoice-card-print * {
+              color: #0f172a !important;
+            }
+            .invoice-badge-status {
+              display: inline-block;
+              padding: 3px 10px;
+              border-radius: 9999px;
+              font-size: 0.75rem;
+              font-weight: 800;
+              text-transform: uppercase;
+              border: 1px solid #059669 !important;
+              color: #059669 !important;
+              background: #ecfdf5 !important;
+            }
+            .total-amount {
+              color: #0284c7 !important;
+              font-family: 'Space Grotesk', system-ui, sans-serif;
+              font-size: 1.4rem;
+              font-weight: 800;
+            }
+            [style*="color:var(--accent-cyan)"] {
+              color: #0284c7 !important;
+            }
+            [style*="color:var(--text-dim)"] {
+              color: #64748b !important;
+            }
+            [style*="color:var(--text-muted)"] {
+              color: #334155 !important;
+            }
+            [style*="background:var(--glass-bg-subtle)"] {
+              background: #f8fafc !important;
+              border: 1px solid #e2e8f0 !important;
+            }
+          </style>
+        </head>
+        <body>
+          ${invoiceContent.innerHTML}
+        </body>
+        </html>
+      `);
+      frameDoc.close();
+
+      setTimeout(() => {
+        printFrame.contentWindow.focus();
+        printFrame.contentWindow.print();
+      }, 300);
+    }
+
     // ============================================================================
     // 9. TOAST NOTIFICATION ENGINE
     // ============================================================================
